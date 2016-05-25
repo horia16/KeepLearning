@@ -13,5 +13,13 @@ namespace KeepLearning
         [XmlArray("Categories")]
         [XmlArrayItem("Category")]
         public List<CategoryInfo> Categories = new List<CategoryInfo>();
+
+        public void SetBaseCategories()
+        {
+            foreach(CategoryInfo category in Categories)
+            {
+                category.SetBaseCategories();
+            }
+        }
     }
 }
