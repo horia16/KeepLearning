@@ -9,19 +9,32 @@ namespace KeepLearning
 {
     public class Category
     {
-        public Category()
-        {
+        [XmlAttribute("name")]
+        public string Name;
 
-        }
+        [XmlArray("Subcategories")]
+        [XmlArrayItem("Category")]
+        public List<Category> Subcategories = new List<Category>();
 
+        [XmlArray("Words")]
+        [XmlArrayItem("Word")]
+        public List<string> Words = new List<string>();
+
+        [XmlArray("Images")]
+        [XmlArrayItem("Image")]
+        public List<string> Images = new List<string>();
+        
         public void GetSubcategoriesElements()
         {
-            foreach(Category subcategory in Subcategories)
+            if (Subcategories == null)
+                return;
+
+            foreach (Category subcategory in Subcategories)
             {
                 subcategory.GetSubcategoriesElements();
 
                 Words.AddRange(subcategory.Words);
-                ImagePaths.AddRange(ImagePaths);
+                Images.AddRange(subcategory.Images);
             }
         }
 
@@ -32,18 +45,5 @@ namespace KeepLearning
                 subcategory.Subcategories.Clear();
             }
         }
-
-        [XmlAttribute("name")]
-        public string Name;
-
-        [XmlArray("Subcategories")]
-        [XmlArrayItem("Category")]
-        IList<Category> Subcategories;
-
-        [XmlArray("Words")]
-        public List<string> Words;
-
-        [XmlArray("ImagePaths")]
-        public List<string> ImagePaths;
     }
 }
