@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-
 namespace KeepLearning
 {
 	public class ElementsRemoverController : MonoBehaviour
@@ -65,7 +64,7 @@ namespace KeepLearning
 
 		public void ButtonClick(GameObject button)
 		{
-			if (button.GameItem.isOk == true)
+			if (button.GetComponent<GameItem>() == true)
 			{
 				Destroy (button);
 			}
@@ -156,7 +155,7 @@ namespace KeepLearning
 			element.transform.position = new Vector3 (startPointDown.transform.position.x, Random.Range (startPointDown.transform.position.y, startPointUp.transform.position.y), 0f);
 			element.AddComponent <ElementMover>();
 			element.GetComponent <ElementMover> ().mother = this;
-			element.GetComponent <GameItem> ().isOk = isOk;
+			element.GetComponent <GameItem> ().IsCorectItem = isOk;
 		}
 
 		Category GetRandomSubcategory(Category category)
