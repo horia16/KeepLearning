@@ -22,18 +22,7 @@ namespace KeepLearning
 
         public static CategoriesInfoContainer LoadCategoriesInfo()
         {
-            return LoadCategoriesInfo(Path.Combine(Environment.CurrentDirectory, "CategoriesInfo.xml"));
-        }
-
-        public static CategoriesInfoContainer LoadCategoriesInfo(string path)
-        {
-            var serializer = new XmlSerializer(typeof(CategoriesInfoContainer));
-            var stream = new FileStream(path, FileMode.Open);
-
-            CategoriesInfoContainer container = (CategoriesInfoContainer)serializer.Deserialize(stream);
-            stream.Close();
-
-            return container;
+            return CategoryInfo.LoadCategoriesInfo(Path.Combine(Environment.CurrentDirectory, "CategoriesInfo.xml"));
         }
     }
 }

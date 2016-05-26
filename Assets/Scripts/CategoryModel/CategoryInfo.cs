@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Xml.Serialization;
 
 namespace KeepLearning
@@ -21,6 +22,17 @@ namespace KeepLearning
                 category.BaseCategory = this;
                 category.SetBaseCategories();
             }
+        }
+        
+        public static CategoriesInfoContainer LoadCategoriesInfo(string path)
+        {
+            var serializer = new XmlSerializer(typeof(CategoriesInfoContainer));
+            var stream = new FileStream(path, FileMode.Open);
+
+            CategoriesInfoContainer container = (CategoriesInfoContainer)serializer.Deserialize(stream);
+            stream.Close();
+
+            return container;
         }
     }
 }
