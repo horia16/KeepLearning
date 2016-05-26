@@ -1,30 +1,37 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ElementsFinderController
 {
-    public class ElementsFinderController : MonoBehaviour
+    public class ElementsFinderController : MiniGame
     {
         static int NumberOfCorectWords;
         static int NumberOfCorectImages;
         static int NumberOfWrongImages;
         static int NumberOfWrongWords;
-
-        public Category Domain;
+        
         public Category CorectCategory;
 
-        public GameObject WordPrefab, ImagePrefab;
+        public GameObject ItemPrefab;
+        public Transform GameSpace;
 
-        public void StartGame()
+        public int CorectItemsCount;
+        public int WrongItemsCount;
+
+        public override void StartGame(Category domain)
         {
-            if (Domain == null)
-                throw new System.Exception("Cannot start a game with no category!");
+            Domain = domain;
 
             Domain.GetSubcategoriesElements();
             Domain.DestroyUnusedSubcategories();
             Initialize();
+        }
+
+        void Awake()
+        {
+            GameSpace = transform.FindChild("Game space");
+            ItemPrefab = Resources.Load<GameObject>("Prefabs/ElementsFinder/GameItem");
         }
 
         void Initialize()
@@ -41,6 +48,8 @@ namespace ElementsFinderController
 
             AddImages(CategoryRandomer.ChooseItems(CorectCategory.Images, NumberOfCorectImages), true);
             AddWords(CategoryRandomer.ChooseItems(CorectCategory.Words, NumberOfCorectWords), true);
+
+            GameItem.GameItemChoosed += ItemChoosed;
         }
 
         void AddIncorectItems()
@@ -70,9 +79,10 @@ namespace ElementsFinderController
         {
             foreach(string word in words)
             {
-                GameItem item = Instantiate(WordPrefab).GetComponent<GameItem>();
+                GameItem item = Instantiate(ItemPrefab).GetComponent<GameItem>();
                 item.IsCorectItem = isCorectWord;
-                item.gameObject.GetComponent<Text>().text = word;
+                item.transform.SetParent(GameSpace);
+                item.gameObject.GetComponentInChildren<Text>().text = word;
             }
         }
 
@@ -80,10 +90,45 @@ namespace ElementsFinderController
         {
             foreach (string image in images)
             {
-                GameItem item = Instantiate(ImagePrefab).GetComponent<GameItem>();
+                GameItem item = Instantiate(ItemPrefab).GetComponent<GameItem>();
                 item.IsCorectItem = isCorectImage;
+                item.transform.SetParent(GameSpace);
                 item.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(image);
+                item.gameObject.GetComponentInChildren<Text>().text = "";
             }
+        }
+
+        void ItemChoosed(GameItem item)
+        {
+            if(item.IsCorectItem)
+            {
+                CorectItemsCount++;
+                if (CorectItemsCount == NumberOfCorectImages + NumberOfCorectWords)
+                    GameFinished();
+            }
+            else
+            {
+                WrongItemsCount++;
+                if (WrongItemsCount > 3)
+                    GameFinished();
+            }
+
+            Destroy(item);
+        }
+        
+        internal override void Refresh()
+        {
+            base.Refresh();
+            foreach (GameItem item in GameSpace.gameObject.GetComponentsInChildren<GameItem>())
+                Destroy(item);
+        }
+
+        internal override int GetPoints()
+        {
+            if (CorectItemsCount < NumberOfCorectImages + NumberOfCorectWords)
+                return 0;
+            else
+                return CorectItemsCount;
         }
     }
 }
