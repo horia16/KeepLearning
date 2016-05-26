@@ -3,57 +3,47 @@ using System.IO;
 using System.Xml.Serialization;
 using UnityEngine;
 
-
-public class MenuManager : MonoBehaviour
+namespace KeepLearning
 {
-
-	public void CloseMenu(GameObject Object)
-	{
-	   	Object.SetActive(false);
-	}
-
-	public void OpenMenu(GameObject Object)
-	{
-		Object.SetActive (true);
-	}
-
-    public static CategoriesInfoContainer CategoriesInfoContainer;
-
-    public void Awake()
+    public class MenuManager : MonoBehaviour
     {
-        CategoriesInfoContainer = LoadCategoriesInfo();
+		public GameObject elementRemoverCanvas;
+
+        public static CategoriesInfoContainer CategoriesInfoContainer;
+
+        public GameObject SelectGameMenu;
+        public ElementsRemoverController ElementsRemoverController;
+
+        string CategoryInfoXmlPath = Path.Combine(Environment.CurrentDirectory, "CategoryInfo.xml");
+        string CategoryPathXmlPath = Path.Combine(Environment.CurrentDirectory, "Category.xml");
+
+        public void Awake()
+        {
+            CategoriesInfoContainer = CategoryInfo.LoadCategoriesInfo(CategoryInfoXmlPath);
+        }
+
+        public void CloseMenu(GameObject Object)
+        {
+            Object.SetActive(false);
+        }
+
+        public void OpenMenu(GameObject Object)
+        {
+            Object.SetActive(true);
+        }
+
+        public void StartElementsRemoverSelecter(GameObject SelectorMenu)
+        {
+            OpenMenu(SelectorMenu);
+            CategoriesInfoMenu menu = Instantiate(Resources.Load<GameObject>("Prefabs/CategoriesInfoMenu/CategoryInfoMenu")).GetComponent<CategoriesInfoMenu>();
+            menu.transform.SetParent(SelectorMenu.transform);
+            menu.SetContainer(CategoriesInfoContainer);
+            menu.OnCategoryChoosed += (CategoryInfo info) => 
+			{
+				elementRemoverCanvas.gameObject.SetActive(true);
+				ElementsRemoverController.StartGame(Category.GetCategory(info, CategoryPathXmlPath)); 
+			};
+            menu.OnBack += () => { SelectGameMenu.SetActive(true); };
+        }
     }
-
-    public void ChangeMenu(GameObject oldMenu, GameObject newMenu)
-    {
-        oldMenu.SetActive(false);
-        newMenu.SetActive(true);
-    }
-
-    public static CategoriesInfoContainer LoadCategoriesInfo()
-    {
-        return LoadCategoriesInfo(Path.Combine(Environment.CurrentDirectory, "CategoriesInfo.xml"));
-    }
-
-    public static CategoriesInfoContainer LoadCategoriesInfo(string path)
-    {
-        var serializer = new XmlSerializer(typeof(CategoriesInfoContainer));
-        var stream = new FileStream(path, FileMode.Open);
-
-        CategoriesInfoContainer container = (CategoriesInfoContainer)serializer.Deserialize(stream);
-        stream.Close();
-
-        return container;
-    }
-
-	public static CategoriesContainer LoadCategories(string path)
-	{
-		var serializer = new XmlSerializer(typeof(CategoriesContainer));
-		var stream = new FileStream(path, FileMode.Open);
-
-		CategoriesContainer container = (CategoriesContainer)serializer.Deserialize(stream);
-		stream.Close();
-
-		return container;
-	}
 }

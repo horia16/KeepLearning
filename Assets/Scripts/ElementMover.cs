@@ -1,36 +1,42 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ElementMover : MonoBehaviour {
+namespace KeepLearning
+{
+	public class ElementMover : MonoBehaviour {
 
-    public int speed = 30;
-    Vector3 direction;
+	    public int speed = 30;
+		public ElementsRemoverController mother;
+	    Vector3 direction;
 
-	void Start ()
-	{
-		RectTransform canvas = this.GetComponentInParent<RectTransform> ();
-		int x = Random.Range (0, 4);
-		x = 0;
-		if (x==0)
+		void Start ()
 		{
-			Vector3 position = new Vector3();
-			position = ((RectTransform)this.transform).localPosition;
-			Debug.Log (position);
+			RectTransform canvas = this.GetComponentInParent<RectTransform> ();
+			int x = Random.Range (0, 4);
+			x = 0;
+			if (x==0)
+			{
+				Vector3 position = new Vector3();
+				position = ((RectTransform)this.transform).localPosition;
+				Debug.Log (position);
 
-			float min = -0.5f;
-			float max = 0.5f;
+				float min = -0.5f;
+				float max = 0.5f;
 
-			if (position.y < 0)
-				min=0;
-			else
-				max=0;
+				if (position.y < 0)
+					min=0;
+				else
+					max=0;
 
-            direction = new Vector3(1, Random.Range(min, max), 0);
-        }
+	            direction = new Vector3(1, Random.Range(min, max), 0);
+	        }
+		}
+	    void Update()
+	    {
+	        this.transform.Translate(direction * speed * Time.deltaTime);
+			if (mother.isStarted == false)
+				Destroy (this.gameObject);
+	    }
+
 	}
-    void Update()
-    {
-        this.transform.Translate(direction * speed * Time.deltaTime);
-    }
-
 }
