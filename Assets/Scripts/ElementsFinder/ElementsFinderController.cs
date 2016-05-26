@@ -2,133 +2,134 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ElementsFinderController
+public class ElementsFinderController : MiniGame
 {
-    public class ElementsFinderController : MiniGame
+    public static int NumberOfCorectWords = 2;
+    public static int NumberOfCorectImages = 1;
+    public static int NumberOfWrongImages = 2;
+    public static int NumberOfWrongWords = 2;
+        
+    public Category CorectCategory;
+
+    public GameObject ItemPrefab;
+    public Transform GameSpace;
+
+    public int CorectItemsCount;
+    public int WrongItemsCount;
+
+    public override void StartGame(Category domain, GameObject canvas)
     {
-        static int NumberOfCorectWords;
-        static int NumberOfCorectImages;
-        static int NumberOfWrongImages;
-        static int NumberOfWrongWords;
-        
-        public Category CorectCategory;
+        base.StartGame(domain, canvas);
 
-        public GameObject ItemPrefab;
-        public Transform GameSpace;
+        Domain.GetSubcategoriesElements();
+        Domain.DestroyUnusedSubcategories();
+        Initialize();
+    }
 
-        public int CorectItemsCount;
-        public int WrongItemsCount;
+    void Awake()
+    {
+        GameSpace = transform.FindChild("Game space");
+        ItemPrefab = Resources.Load<GameObject>("Prefabs/ElementsFinder/Item");
+    }
 
-        public override void StartGame(Category domain, GameObject canvas)
-        {
-            base.StartGame(domain, canvas);
+    void Initialize()
+    {
+        CorectCategory = CategoryRandomer.ChooseSubcategory(Domain, CanBeCorectCategory);
+        transform.FindChild("CategoryName").GetComponent<Text>().text = CorectCategory.Name;
+        AddCorectItems();
+        AddIncorectItems();
+    }
 
-            Domain.GetSubcategoriesElements();
-            Domain.DestroyUnusedSubcategories();
-            Initialize();
-        }
+    void AddCorectItems()
+    {
+        if (CorectCategory == null)
+            throw new System.Exception("No category match!");
 
-        void Awake()
-        {
-            GameSpace = transform.FindChild("Game space");
-            ItemPrefab = Resources.Load<GameObject>("Prefabs/ElementsFinder/GameItem");
-        }
+        AddImages(CategoryRandomer.ChooseItems(CorectCategory.Images, NumberOfCorectImages), true);
+        AddWords(CategoryRandomer.ChooseItems(CorectCategory.Words, NumberOfCorectWords), true);
 
-        void Initialize()
-        {
-            CorectCategory = CategoryRandomer.ChooseRandomSubcategory(Domain, CanBeCorectCategory);
-            AddCorectItems();
-            AddIncorectItems();
-        }
+        GameItem.GameItemChoosed += ItemChoosed;
+    }
 
-        void AddCorectItems()
-        {
-            if (CorectCategory == null)
-                throw new System.Exception("No category match!");
-
-            AddImages(CategoryRandomer.ChooseItems(CorectCategory.Images, NumberOfCorectImages), true);
-            AddWords(CategoryRandomer.ChooseItems(CorectCategory.Words, NumberOfCorectWords), true);
-
-            GameItem.GameItemChoosed += ItemChoosed;
-        }
-
-        void AddIncorectItems()
-        {
-            AddWords(CategoryRandomer.GetRandomWords(Domain, NumberOfWrongWords,
-                delegate (Category category)
-                {
-                    return category != CorectCategory;
-                }), false);
+    void AddIncorectItems()
+    {
+        AddWords(CategoryRandomer.GetRandomWords(Domain, NumberOfWrongWords,
+            delegate (Category category)
+            {
+                return category != CorectCategory;
+            }), false);
             
-            AddImages(CategoryRandomer.GetRandomImages(Domain, NumberOfWrongImages,
-                delegate (Category category)
-                {
-                    return category != CorectCategory;
-                }), false);
-        }
-
-        public static bool CanBeCorectCategory(Category category)
-        {
-            if (category.Words.Count >= NumberOfCorectWords && category.Images.Count >= NumberOfCorectImages)
-                return true;
-            else
-                return false;
-        }
-
-        void AddWords(IList<string> words, bool isCorectWord)
-        {
-            foreach(string word in words)
+        AddImages(CategoryRandomer.GetRandomImages(Domain, NumberOfWrongImages,
+            delegate (Category category)
             {
-                GameItem item = Instantiate(ItemPrefab).GetComponent<GameItem>();
-                item.IsCorectItem = isCorectWord;
-                item.transform.SetParent(GameSpace);
-                item.gameObject.GetComponentInChildren<Text>().text = word;
-            }
+                return category != CorectCategory;
+            }), false);
+    }
+
+    public static bool CanBeCorectCategory(Category category)
+    {
+        if (category.Words.Count >= NumberOfCorectWords && category.Images.Count >= NumberOfCorectImages)
+            return true;
+        else
+            return false;
+    }
+
+    public static bool CanBeCorectCategory(CategoryInfo category)
+    {
+        if (category.WordsCount >= NumberOfCorectWords && category.ImagesCount >= NumberOfCorectImages)
+            return true;
+        else
+            return false;
+    }
+
+    void AddWords(IList<string> words, bool isCorectWord)
+    {
+        foreach(string word in words)
+        {
+            ElementsFinderItem item = Instantiate(ItemPrefab).GetComponent<ElementsFinderItem>();
+            item.IsCorectItem = isCorectWord;
+            item.transform.SetParent(GameSpace, false);
+            item.gameObject.GetComponentInChildren<Text>().text = word;
+            item.SetRandom();
+        }
+    }
+
+    void AddImages(IList<string> images, bool isCorectImage)
+    {
+        foreach (string image in images)
+        {
+            ElementsFinderItem item = Instantiate(ItemPrefab).GetComponent<ElementsFinderItem>();
+            item.IsCorectItem = isCorectImage;
+            item.transform.SetParent(GameSpace, false);
+            item.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(image);
+            item.gameObject.GetComponentInChildren<Text>().text = "";
+            item.SetRandom();
+        }
+    }
+
+    void ItemChoosed(GameItem item)
+    {
+        if(item.IsCorectItem)
+        {
+            CorectItemsCount++;
+            if (CorectItemsCount == NumberOfCorectImages + NumberOfCorectWords)
+                GameFinished();
+        }
+        else
+        {
+            WrongItemsCount++;
+            if (WrongItemsCount > 3)
+                GameFinished();
         }
 
-        void AddImages(IList<string> images, bool isCorectImage)
-        {
-            foreach (string image in images)
-            {
-                GameItem item = Instantiate(ItemPrefab).GetComponent<GameItem>();
-                item.IsCorectItem = isCorectImage;
-                item.transform.SetParent(GameSpace);
-                item.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(image);
-                item.gameObject.GetComponentInChildren<Text>().text = "";
-            }
-        }
+        Destroy(item);
+    }
 
-        void ItemChoosed(GameItem item)
-        {
-            if(item.IsCorectItem)
-            {
-                CorectItemsCount++;
-                if (CorectItemsCount == NumberOfCorectImages + NumberOfCorectWords)
-                    GameFinished();
-            }
-            else
-            {
-                WrongItemsCount++;
-                if (WrongItemsCount > 3)
-                    GameFinished();
-            }
-
-            Destroy(item);
-        }
-        
-        internal override void Refresh()
-        {
-            base.Refresh();
-            foreach (GameItem item in GameSpace.gameObject.GetComponentsInChildren<GameItem>())
-                Destroy(item);
-        }
-
-        internal override int GetPoints()
-        {
-            if (CorectItemsCount < NumberOfCorectImages + NumberOfCorectWords)
-                return 0;
-            else
-                return CorectItemsCount;
-        }
+    internal override int GetPoints()
+    {
+        if (CorectItemsCount < NumberOfCorectImages + NumberOfCorectWords)
+            return 0;
+        else
+            return CorectItemsCount;
     }
 }

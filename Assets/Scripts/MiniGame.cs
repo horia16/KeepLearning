@@ -13,7 +13,7 @@ public class MiniGame : MonoBehaviour
     public virtual void StartGame(Category domain, GameObject canvas)
     {
         Domain = domain;
-        transform.SetParent(canvas.transform);
+        transform.SetParent(canvas.transform, false);
     }
 
     internal virtual int GetPoints()
@@ -32,5 +32,6 @@ public class MiniGame : MonoBehaviour
         if (OnGameFinished != null)
             OnGameFinished(GetPoints());
         Refresh();
+        Destroy(gameObject);
     }
 }

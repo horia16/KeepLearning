@@ -15,4 +15,10 @@ public class CategoriesInfoContainer
             category.SetBaseCategories();
         }
     }
+
+    public void GetSubcategoriesElements()
+    {
+        foreach (CategoryInfo category in Categories)
+            category.GetSubcategoriesElements();
+    }
 }

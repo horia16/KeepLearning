@@ -64,7 +64,7 @@ namespace KeepLearning
 
 		public void ButtonClick(GameObject button)
 		{
-			if (button.GetComponent<GameItem>() == true)
+			if (button.GetComponent<GameItem>().IsCorectItem == true)
 			{
 				Destroy (button);
 			}
@@ -84,7 +84,9 @@ namespace KeepLearning
 					time = 0;
 					int index;
 					if (rightWords.Count == 0 && rightImages.Count == 0)
-						isStarted = false;
+					{
+						StopGame (true);
+					}
 
 					if (numberOfWrong == 0)
 					{
@@ -148,14 +150,16 @@ namespace KeepLearning
 			}
 		}
 
-		void LoadElement(GameObject element2, bool isOk)
+		void LoadElement(GameObject element2, bool IsCorectItem)
 		{
 			GameObject element = GameObject.Instantiate (element2);
 			element.transform.SetParent (gameCanvas.gameObject.transform,false);
 			element.transform.position = new Vector3 (startPointDown.transform.position.x, Random.Range (startPointDown.transform.position.y, startPointUp.transform.position.y), 0f);
 			element.AddComponent <ElementMover>();
+			element.AddComponent <GameItem> ();
+			element.GetComponent <Button>().onClick.AddListener (() => ButtonClick(element));
 			element.GetComponent <ElementMover> ().mother = this;
-			element.GetComponent <GameItem> ().IsCorectItem = isOk;
+			element.GetComponent <GameItem> ().IsCorectItem = IsCorectItem;
 		}
 
 		Category GetRandomSubcategory(Category category)

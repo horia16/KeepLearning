@@ -11,8 +11,9 @@ namespace KeepLearning
 
         public static CategoriesInfoContainer CategoriesInfoContainer;
 
-        public GameObject SelectGameMenu;
-        public ElementsRemoverController ElementsRemoverController;
+        public GameObject CategorySelectorMenu;
+        public GameObject GameSpace;
+        public GameObject GameSelectorMenu;
 
         string CategoryInfoXmlPath = Path.Combine(Environment.CurrentDirectory, "CategoryInfo.xml");
         string CategoryPathXmlPath = Path.Combine(Environment.CurrentDirectory, "Category.xml");
@@ -20,6 +21,10 @@ namespace KeepLearning
         public void Awake()
         {
             CategoriesInfoContainer = CategoryInfo.LoadCategoriesInfo(CategoryInfoXmlPath);
+            CategoriesInfoContainer.GetSubcategoriesElements();
+
+            ElementsFinderGame = Resources.Load<GameObject>("Prefabs/ElementsFinder/Game");
+            ElementsFinderMenu = Resources.Load<GameObject>("Prefabs/ElementsFinder/Menu");
         }
 
         public void CloseMenu(GameObject Object)
@@ -32,18 +37,32 @@ namespace KeepLearning
             Object.SetActive(true);
         }
 
-        public void StartElementsRemoverSelecter(GameObject SelectorMenu)
+        GameObject ElementsFinderGame;
+        GameObject ElementsFinderMenu;
+
+        public void ElementsFinderGameSelected()
         {
-            OpenMenu(SelectorMenu);
-            CategoriesInfoMenu menu = Instantiate(Resources.Load<GameObject>("Prefabs/CategoriesInfoMenu/CategoryInfoMenu")).GetComponent<CategoriesInfoMenu>();
-            menu.transform.SetParent(SelectorMenu.transform);
+            OpenCategoryInfoMenu(ElementsFinderMenu, ElementsFinderGame);
+        }
+
+        public void OpenCategoryInfoMenu(GameObject menuPrefab, GameObject miniGamePrefab)
+        {
+            CloseMenu(GameSelectorMenu);
+            OpenMenu(CategorySelectorMenu);
+            CategoriesInfoMenu menu = Instantiate(menuPrefab).GetComponent<CategoriesInfoMenu>();
+
+            menu.transform.SetParent(CategorySelectorMenu.transform);
             menu.SetContainer(CategoriesInfoContainer);
+
             menu.OnCategoryChoosed += (CategoryInfo info) => 
 			{
-				elementRemoverCanvas.gameObject.SetActive(true);
-				ElementsRemoverController.StartGame(Category.GetCategory(info, CategoryPathXmlPath)); 
+                CloseMenu(CategorySelectorMenu);
+                MiniGame miniGame = Instantiate(miniGamePrefab).GetComponent<MiniGame>();
+				miniGame.StartGame(Category.GetCategory(info, CategoryPathXmlPath), GameSpace); 
 			};
-            menu.OnBack += () => { SelectGameMenu.SetActive(true); };
+
+            menu.OnBack += () => { GameSelectorMenu.SetActive(true); };
+            menu = null;
         }
     }
 }

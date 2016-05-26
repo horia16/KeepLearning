@@ -96,8 +96,7 @@ namespace KeepLearning
         internal void AddNewButtons(IList<CategoryInfo> categories)
         {
             foreach (CategoryInfo category in categories)
-                if (CanChoose(category))
-                    AddNewButton(category);
+                AddNewButton(category);
         }
 
         internal void AddNewButton(CategoryInfo category)
@@ -121,7 +120,7 @@ namespace KeepLearning
 
         internal virtual void ResetSelectButton()
         {
-            if (ActualCategory == null)
+            if (ActualCategory == null || !CanChoose(ActualCategory))
                 SelectButton.enabled = false;
             else
                 SelectButton.enabled = true;

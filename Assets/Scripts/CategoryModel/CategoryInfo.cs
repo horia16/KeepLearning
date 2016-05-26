@@ -11,6 +11,9 @@ public class CategoryInfo
     [XmlArrayItem("Category")]
     public List<CategoryInfo> Subcategories = new List<CategoryInfo>();
 
+    public int WordsCount;
+    public int ImagesCount;
+
     public CategoryInfo BaseCategory;
 
     public void SetBaseCategories()
@@ -21,7 +24,21 @@ public class CategoryInfo
             category.SetBaseCategories();
         }
     }
-        
+
+    public void GetSubcategoriesElements()
+    {
+        if (Subcategories == null)
+            return;
+
+        foreach (CategoryInfo subcategory in Subcategories)
+        {
+            subcategory.GetSubcategoriesElements();
+
+            WordsCount += subcategory.WordsCount;
+            ImagesCount += subcategory.ImagesCount;
+        }
+    }
+
     public static CategoriesInfoContainer LoadCategoriesInfo(string path)
     {
         var serializer = new XmlSerializer(typeof(CategoriesInfoContainer));
