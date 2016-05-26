@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<CategoriesContainer>
+  <Categories>
+    
+    <Category name = "Mate">
+      <Subcategories>
+      
+        <Category name = "Geometrie">
+          <Subcategories>
+            
+            <Category name = "Triunghi">
+              <Words>
+                <Word>a + b > c</Word>
+                <Word>3 laturi</Word>
+                <Word>180 de grade</Word>
+              </Words>
+                
+              <Images>
+                <Image>Mate/Geometrie/Triunghi/0</Image>
+                <Image>Mate/Geometrie/Triunghi/1</Image>
+              </Images>
+            </Category> <!-- Triunghi -->
+
+            <Category name = "Patrat">
+              <Words>
+                <Word>laturi egale</Word>
+                <Word>4 laturi</Word>
+                <Word>360 de grade</Word>
+              </Words>
+
+              <Images>
+                <Image>Mate/Geometrie/Patrat/0</Image>
+                <Image>Mate/Geometrie/Patrat/1</Image>
+              </Images>
+            </Category> <!-- Patrat -->
+            
+          </Subcategories>
+        </Category> <!-- Geometrie -->
+  
+        <Category name = "Algebra">
+      
+          <Words>
+            <Word>1 + 1 = 2</Word>
+            <Word>Relatia lui Shumen</Word>
+            <Word>Tata lui Papaete</Word>
+          </Words>
+          
+          <Images>
+            <Image>Mate/Algebra/0</Image>
+            <Image>Mate/Algebra/1</Image>
+          </Images>
+      
+        </Category> <!-- Algebra -->
+   
+      </Subcategories>
+    
+      <Words>
+        <Word>Domnul Marsanu</Word>
+        <Word>Concurs Sinaia 2016</Word>
+        <Word>Arthur Balauta</Word>
+      </Words>    
+    </Category> <!-- Mate -->
+    
+  </Categories>
+</CategoriesContainer> <!-- Questions -->
