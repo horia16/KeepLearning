@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace KeepLearning
@@ -40,6 +41,21 @@ namespace KeepLearning
             {
                 subcategory.Subcategories.Clear();
             }
+        }
+
+        public static Category GetCategory(CategoryInfo info, string path)
+        {
+            XDocument root = XDocument.Load(path);
+            foreach (XElement element in root.Descendants("Category"))
+                if (element.Attribute("name").Value == info.Name)
+                    return GetCategory(element);
+            return null;
+        }
+
+        public static Category GetCategory(XElement element)
+        {
+            var serializer = new XmlSerializer(typeof(Category));
+            return (Category)serializer.Deserialize(element.CreateReader());
         }
     }
 }
