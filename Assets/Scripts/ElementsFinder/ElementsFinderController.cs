@@ -29,7 +29,7 @@ namespace ElementsFinderController
 
         void Initialize()
         {
-            CorectCategory = CategoryRandomer.ChooseRandomSubcategory(Domain, CanBeCorectCategory);
+            CorectCategory = CategoryRandomer.ChooseSubcategory(Domain, CanBeCorectCategory);
             AddCorectItems();
             AddIncorectItems();
         }
