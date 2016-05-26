@@ -7,10 +7,17 @@ public class ElementsRemoverController : MonoBehaviour {
 
 	public GameObject workSpace;
 	public Text categoryName;
+	public Canvas gameCanvas;
+	public Button categoryButton;
+	public GameObject startPointUp;
+	public GameObject startPointDown;
+	public GameObject prefabText;
 	private Category category;
 	private IList<Category> wrongCategories;
-	private List<string> rightWords,rightImages;
-	private List<string> wrongWords,wrongImages;
+	private List<string> rightWords = new List<string>();
+	private List<string> rightImages = new List<string>();
+	private List<string> wrongWords = new List<string>();
+	private List<string> wrongImages = new List<string>();
 	private bool isStarted;
 	private float time;
 	private int numberOfWrong;
@@ -21,9 +28,28 @@ public class ElementsRemoverController : MonoBehaviour {
 		isStarted = false;
 	}
 
+	void resizeCollider()
+	{
+		Vector2 size = new Vector2 (((RectTransform)gameCanvas.transform).sizeDelta.x,((RectTransform)gameCanvas.transform).sizeDelta.y);
+		Debug.Log (size);
+		size = new Vector2 (((RectTransform)gameCanvas.transform).rect.width,((RectTransform)gameCanvas.transform).rect.height);
+		Debug.Log (size);
+
+		BoxCollider2D collider = gameCanvas.GetComponent<BoxCollider2D> ();
+		collider.size = size;
+		collider.offset = new Vector2 (0, 0);
+	}
+
+	public void StartTest()
+	{
+		Category category = MenuManager.LoadCategories("D:\\D_work\\unity\\Keep Learning\\CategoryTest.xml").Categories[0];
+        StartGame(category);
+    }
+
 	public void StartGame(Category category)
 	{
 		isStarted = true;
+		//resizeCollider ();
 		this.category = category;
 		Category aux = GetRandomSubcategory (category);
 		ExtractElements (category,aux,rightWords,rightImages,wrongWords,wrongImages);
@@ -57,12 +83,12 @@ public class ElementsRemoverController : MonoBehaviour {
 
 					if (index == 0)
 					{
-						GameObject textGO = new GameObject();
-						Text text = textGO.AddComponent <Text>();
+						
 						int aux = Random.Range (0, rightWords.Count);
-						text.text = rightWords [aux];
+
+						prefabText.GetComponentInChildren<Text>().text = rightWords [aux];
 						rightWords.RemoveAt (aux);
-						LoadElement (text.gameObject);
+						LoadElement (prefabText);
 					}
 					else
 					{
@@ -85,12 +111,9 @@ public class ElementsRemoverController : MonoBehaviour {
 
 					if (index == 0)
 					{
-						GameObject textGO = new GameObject();
-						Text text = textGO.AddComponent <Text>();
-
 						int aux = Random.Range (0, wrongWords.Count);
-						text.text = wrongWords [aux];
-						LoadElement (text.gameObject);
+						prefabText.GetComponentInChildren<Text>().text = wrongWords [aux];
+						LoadElement (prefabText);
 					}
 					else
 					{
@@ -105,10 +128,13 @@ public class ElementsRemoverController : MonoBehaviour {
 		}
 	}
 
-	void LoadElement(GameObject element)
+	void LoadElement(GameObject element2)
 	{
-		GameObject.Instantiate (element);
+		GameObject element = GameObject.Instantiate (element2);
+		element.transform.SetParent (gameCanvas.gameObject.transform);
+		element.transform.position = new Vector3 (startPointDown.transform.position.x, Random.Range (startPointDown.transform.position.y, startPointUp.transform.position.y), 0f);
 		element.AddComponent <ElementMover>();
+
 	}
 
 	Category GetRandomSubcategory(Category category)
