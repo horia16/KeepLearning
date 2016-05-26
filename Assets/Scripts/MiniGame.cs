@@ -10,9 +10,10 @@ public class MiniGame : MonoBehaviour
      
     public event Action<int> OnGameFinished;
 
-    public virtual void StartGame(Category domain)
+    public virtual void StartGame(Category domain, GameObject canvas)
     {
         Domain = domain;
+        transform.SetParent(canvas.transform);
     }
 
     internal virtual int GetPoints()

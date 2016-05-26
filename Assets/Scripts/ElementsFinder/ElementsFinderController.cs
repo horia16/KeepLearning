@@ -19,9 +19,9 @@ namespace ElementsFinderController
         public int CorectItemsCount;
         public int WrongItemsCount;
 
-        public override void StartGame(Category domain)
+        public override void StartGame(Category domain, GameObject canvas)
         {
-            Domain = domain;
+            base.StartGame(domain, canvas);
 
             Domain.GetSubcategoriesElements();
             Domain.DestroyUnusedSubcategories();
