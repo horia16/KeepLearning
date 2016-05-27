@@ -8,44 +8,48 @@ public class ElementsFinderController : MiniGame
     public static int NumberOfCorectImages = 1;
     public static int NumberOfWrongImages = 2;
     public static int NumberOfWrongWords = 2;
-        
-    public Category CorectCategory;
 
     public GameObject ItemPrefab;
     public Transform GameSpace;
     public Text ScoreText;
+    public GameObject GameInfo;
 
     public int CorectItemsCount;
     public int WrongItemsCount;
 
     public override void StartGame(Category domain, GameObject canvas)
     {
-        base.StartGame(domain, canvas);
+        Domain = domain;
+        GameInfo.transform.SetParent(transform, false);
 
         Domain.GetSubcategoriesElements();
         Domain.DestroyUnusedSubcategories();
+
         Initialize();
     }
 
     void Awake()
     {
-        GameSpace = transform.FindChild("Game space");
+        GameSpace = transform.FindChild("GameSpace");
         ItemPrefab = Resources.Load<GameObject>("Prefabs/ElementsFinder/Item");
-        ScoreText = transform.FindChild("Score").GetComponent<Text>();
+        GameInfo = transform.FindChild("GameInfo").gameObject;
+        ScoreText = GameInfo.transform.FindChild("Score").GetComponent<Text>();
     }
 
     void Initialize()
     {
-        CorectCategory = CategoryRandomer.ChooseSubcategory(Domain, CanBeCorectCategory);
-        transform.FindChild("CategoryName").GetComponent<Text>().text = CorectCategory.Name;
+        Category CorectCategory = CategoryRandomer.ChooseSubcategory(Domain, CanBeCorectCategory);
+        GameInfo.transform.FindChild("CategoryName").GetComponent<Text>().text = CorectCategory.Name;
 
-        AddCorectItems();
-        AddIncorectItems();
+        AddCorectItems(CorectCategory);
+        AddIncorectItems(CorectCategory);
 
         RefreshScore();
+        CorectCategory = null;
+        Domain = null;
     }
 
-    void AddCorectItems()
+    void AddCorectItems(Category CorectCategory)
     {
         if (CorectCategory == null)
             throw new System.Exception("No category match!");
@@ -56,7 +60,7 @@ public class ElementsFinderController : MiniGame
         GameItem.GameItemChoosed += ItemChoosed;
     }
 
-    void AddIncorectItems()
+    void AddIncorectItems(Category CorectCategory)
     {
         AddWords(CategoryRandomer.GetRandomWords(Domain, NumberOfWrongWords,
             delegate (Category category)
@@ -106,8 +110,7 @@ public class ElementsFinderController : MiniGame
             ElementsFinderItem item = Instantiate(ItemPrefab).GetComponent<ElementsFinderItem>();
             item.IsCorectItem = isCorectImage;
             item.transform.SetParent(GameSpace, false);
-            item.gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(image);
-            item.gameObject.GetComponentInChildren<Text>().text = "";
+            item.GetComponent<Image>().sprite = Resources.Load<Sprite>(image);
             item.SetRandom();
         }
     }
