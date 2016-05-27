@@ -16,6 +16,9 @@ namespace KeepLearning
         public GameObject CategorySelectorMenu;
         public GameObject GameSpace;
         public GameObject GameSelectorMenu;
+        public GameObject GamePanel;
+
+        public MiniGame currentGame;
 
         string CategoryInfoXmlPath = Path.Combine(Environment.CurrentDirectory, "CategoryInfo.xml");
         string CategoryPathXmlPath = Path.Combine(Environment.CurrentDirectory, "Category.xml");
@@ -45,7 +48,7 @@ namespace KeepLearning
 		void RefreshPoints()
 		{
 			for (int i = 0; i < textPoints.Count; i++) {
-				textPoints [i].text = "Points: " + points.ToString ();
+				textPoints [i].text = "Score: " + points.ToString ();
 			}
 		}
 
@@ -94,14 +97,21 @@ namespace KeepLearning
 
             menu.OnCategoryChoosed += (CategoryInfo info) => 
 			{
+                GamePanel.SetActive(true);
                 CloseMenu(CategorySelectorMenu);
-                MiniGame miniGame = Instantiate(miniGamePrefab).GetComponent<MiniGame>();
-				miniGame.OnGameFinished += (int points) => { this.points+=points; PlayerPrefs.SetInt("points",points); RefreshPoints(); PlayerPrefs.Save();};
-				miniGame.StartGame(Category.GetCategory(info, CategoryPathXmlPath), GameSpace); 
+                currentGame = Instantiate(miniGamePrefab).GetComponent<MiniGame>();
+                currentGame.OnGameFinished += (int points) => { this.points+=points; PlayerPrefs.SetInt("points",points); RefreshPoints(); PlayerPrefs.Save();};
+                currentGame.StartGame(Category.GetCategory(info, CategoryPathXmlPath), GameSpace); 
 			};
 
             menu.OnBack += () => { GameSelectorMenu.SetActive(true); };
             menu = null;
         }
+
+        public void BackFromGame()
+        {
+            currentGame.GameFinished();
+        }
+
     }
 }

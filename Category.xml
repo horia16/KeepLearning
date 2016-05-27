@@ -3,189 +3,228 @@
   <Categories>
     
 	<Category name = "Cultura generala">
-		<Category name = "Mate">
-		  <Subcategories>
-		  
-			<Category name = "Geometrie">
-			  <Subcategories>
-				
-				<Category name = "Triunghi">
-				  <Words>
-					<Word>Echilateral</Word>
-					<Word>Isoscel</Word>
-					<Word>Scalen</Word>
-					<Word>Are 3 laturi!</Word>
-					<Word>Triunghi dreptunghic</Word>
-				  </Words>
-					
-				  <Images>
-					
-				  </Images>
-				</Category> <!-- Triunghi -->
-
-				<Category name = "Patrat">
-				  <Words>
-					<Word>Are 4 laturi!</Word>
-					<Word>Patrulater regulat!</Word>
-					<Word>Patrulater inscriptibil!</Word>
-				  </Words>
-
-				  <Images>
-					
-				  </Images>
-				</Category> <!-- Patrat -->
-				<Word>Patrulater</Word>
-				<Word>Unghi de 180 de grade!</Word>
-				<Word>Unghi drept</Word>
-				<Word>Linie</Word>
-				<Word>Punct</Word>
-				<Word>Cerc</Word>
-				<Word>Pitagora</Word>
-			  </Subcategories>
-			</Category> <!-- Geometrie -->
-	  
-			<Category name = "Algebra">
+	
+		<Subcategories>
+			<Category name = "Mate">
 				<Subcategories>
-					<Category name = "Calcule">
+			  
+				<Category name = "Geometrie">
+					<Subcategories>
 					
-						<Words>
-							<Word>1+1=2</Word>
-							<Word>x+4=3</Word>
-							<Word>140:2=?</Word>
-							<Word>(25+25)-3*0=?</Word>
-							<Word>(1+2+3+...+n)=n*(n+1):2</Word>
-						</Words>
-						
-						<Images>
-						</Images>
+						<Category name = "Triunghi">
+						  <Words>
+							<Word>Echilateral</Word>
+							<Word>Isoscel</Word>
+							<Word>Scalen</Word>
+							<Word>Are 3 laturi!</Word>
+							<Word>Triunghi dreptunghic</Word>
+						  </Words>
+							
+						</Category> <!-- Triunghi -->
+
+						<Category name = "Patrat">
+						  <Words>
+							<Word>Are 4 laturi!</Word>
+							<Word>Patrulater regulat!</Word>
+							<Word>Patrulater inscriptibil!</Word>
+						  </Words>
+
+						</Category> <!-- Patrat -->
 					
-					</Category> <!-- Calcule -->
-				</Subcategories>
+					</Subcategories>
+				  
+				  <Words>
+					<Word>Patrulater</Word>
+					<Word>Unghi de 180 de grade!</Word>
+					<Word>Unghi drept</Word>
+					<Word>Linie</Word>
+					<Word>Punct</Word>
+					<Word>Cerc</Word>
+					<Word>Pitagora</Word>
+				  </Words>
+				  <Image>
+					<Image>DataBase/Mate/Geometrie/0</Image>
+					<Image>DataBase/Mate/Geometrie/1</Image>
+					<Image>DataBase/Mate/Geometrie/2</Image>
+				  </Image>
+				</Category> <!-- Geometrie -->
 		  
-			</Category> <!-- Algebra -->
-	   
-			<Category name = "Simboluri matematice">
+				<Category name = "Algebra">
+					<Subcategories>
+						<Category name = "Calcule">
+						
+							<Words>
+								<Word>1+1=2</Word>
+								<Word>x+4=3</Word>
+								<Word>140:2=?</Word>
+								<Word>(25+25)-3*0=?</Word>
+								<Word>(1+2+3+...+n)=n*(n+1):2</Word>
+							</Words>
+							
+						
+						</Category> <!-- Calcule -->
+					</Subcategories>
+			  
+				</Category> <!-- Algebra -->
+		   
+				<Category name = "Simboluri matematice">
+				
+					<Images> 
+						<Image>DataBase/Mate/SimboluriMatematice/0</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/1</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/2</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/3</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/4</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/5</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/6</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/7</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/8</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/9</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/10</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/11</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/12</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/13</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/14</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/15</Image>
+						<Image>DataBase/Mate/SimboluriMatematice/16</Image>
+					</Images>
+					
+				</Category> <!-- Simboluri matematice -->
+			  
+				</Subcategories>
 			
-				<Images> 
-					<Image>Mate/SimboluriMatematice/0</Image>
-					<Image>Mate/SimboluriMatematice/1</Image>
-					<Image>Mate/SimboluriMatematice/2</Image>
-					<Image>Mate/SimboluriMatematice/3</Image>
-					<Image>Mate/SimboluriMatematice/4</Image>
-					<Image>Mate/SimboluriMatematice/5</Image>
-					<Image>Mate/SimboluriMatematice/6</Image>
-					<Image>Mate/SimboluriMatematice/7</Image>
-					<Image>Mate/SimboluriMatematice/8</Image>
-					<Image>Mate/SimboluriMatematice/9</Image>
-					<Image>Mate/SimboluriMatematice/10</Image>
-					<Image>Mate/SimboluriMatematice/11</Image>
-					<Image>Mate/SimboluriMatematice/12</Image>
-					<Image>Mate/SimboluriMatematice/13</Image>
-					<Image>Mate/SimboluriMatematice/14</Image>
-					<Image>Mate/SimboluriMatematice/15</Image>
-					<Image>Mate/SimboluriMatematice/16</Image>
+			  <Words>
+				<Word>Pitagora</Word>
+				<Word>Euclid</Word>
+				<Word>Papus</Word>
+				<Word>Bernoulli</Word>
+				<Word>Ceva</Word>
+				<Word>Fibonacci</Word>
+				<Word>Tales</Word>
+				<Word>Pascal</Word>
+			  </Words>   
+
+			<Images>
+				<Image>DataBase/Mate0</Image>
+				<Image>DataBase/Mate1</Image>
+				<Image>DataBase/Mate2</Image>
+				<Image>DataBase/Mate3</Image>
+			</Images>
+			
+			</Category> <!-- Mate -->
+			
+			<Category name = "Biologie">
+			
+				<Subcategories>
+			
+				<Category name = "Sistemul circulator">
+					<Words>
+						<Word>Inima</Word>
+						<Word>Artere</Word>
+						<Word>Vene</Word>
+						<Word>Sange</Word>
+						<Word>Ventricule</Word>
+						<Word>Capilare</Word>
+						<Word>Diastola</Word>
+						<Word>Sistola</Word>
+						<Word>Circulatia mica</Word>
+						<Word>Circulatia mare</Word>
+					</Words>
+					
+					<Images>
+					
+						<Image>DataBase/Biologie/SistemulCirculator/0</Image>
+						<Image>DataBase/Biologie/SistemulCirculator/1</Image>
+						<Image>DataBase/Biologie/SistemulCirculator/2</Image>
+						
+					</Images>
+					
+				</Category> <!-- Sistemul circulator -->
+				
+				<Category name = "Sistemul respirator">
+					<Words>
+						<Word>Plamanii</Word>
+						<Word>Branhii</Word>
+						<Word>Trahee</Word>
+						<Word>Respiratie activa</Word>
+						<Word>Respiratie externa</Word>
+						<Word>Faringe</Word>
+						<Word>Laringe</Word>
+						<Word>Bronhii</Word>
+						<Word>Alveole pulmonare</Word>
+					</Words>
+					
+					<Images>
+						<Image>DataBase/Biologie/SistemulRespirator/0</Image>
+						<Image>DataBase/Biologie/SistemulRespirator/1</Image>
+						<Image>DataBase/Biologie/SistemulRespirator/2</Image>
+						
+					</Images>
+				</Category>
+				
+				<Category name = "Ceula">
+				
+					<Words>
+						<Word>Unitatea de baza, structurala si functionala!</Word>
+						<Word>Procariote</Word>
+						<Word>Eucariote</Word>
+						<Word>Archaea</Word>
+						<Word>Bacterii</Word>
+						<Word>Nucleu</Word>
+						<Word>Membrana</Word>
+						<Word>Citoplasma</Word>
+						<Word>Mitoza</Word>
+						<Word>Meioza</Word>
+						<Word>Diviziune</Word>
+						<Word>Haploide</Word>
+						<Word>Gameti</Word>
+						<Word>Spori</Word>
+					</Words>
+					
+					<Images>
+						<Image>DataBase/Biologie/Celula/0</Image>
+						<Image>DataBase/Biologie/Celula/1</Image>
+					</Images>
+				</Category> <!-- Celula -->
+				
+				</Subcategories>
+				
+				<Words>
+					<Word>Clorofila</Word>
+					<Word>Copaci</Word>
+					<Word>Frunze</Word>
+					<Word>Tulpina</Word>
+					<Word>Animale</Word>
+					<Word>Organisme</Word>
+					<Word>Seminte</Word>
+					<Word>Fruct</Word>
+				</Words>
+				
+				<Images>
+					<Image>DataBase/Biologie/0</Image>
+					<Image>DataBase/Biologie/1</Image>
+					<Image>DataBase/Biologie/2</Image>
+					<Image>DataBase/Biologie/3</Image>
 				</Images>
 				
-			</Category> <!-- Simboluri matematice -->
-		  
-		  </Subcategories>
+			</Category> <!-- Biologie -->
 		
-		  <Words>
-			<Word>Pitagora</Word>
-			<Word>Euclid</Word>
-			<Word>Papus</Word>
-			<Word>Bernoulli</Word>
-			<Word>Ceva</Word>
-			<Word>Fibonacci</Word>
-			<Word>Tales</Word>
-			<Word>Pascal</Word>
-		  </Words>    
-		</Category> <!-- Mate -->
-		
-		<Category name = "Biologie">
-		
-			<Subcategories>
-		
-			<Category name = "Sistemul circulator">
-				<Words>
-					<Word>Inima</Word>
-					<Word>Artere</Word>
-					<Word>Vene</Word>
-					<Word>Sange</Word>
-					<Word>Ventricule</Word>
-					<Word>Capilare</Word>
-					<Word>Diastola</Word>
-					<Word>Sistola</Word>
-					<Word>Circulatia mica</Word>
-					<Word>Circulatia mare</Word>
-				</Words>
-				
-				
-			</Category> <!-- Sistemul circulator -->
-			
-			<Category name = "Sistemul respirator">
-				<Words>
-					<Word>Plamanii</Word>
-					<Word>Branhii</Word>
-					<Word>Trahee</Word>
-					<Word>Respiratie activa</Word>
-					<Word>Respiratie externa</Word>
-					<Word>Faringe</Word>
-					<Word>Laringe</Word>
-					<Word>Bronhii</Word>
-					<Word>Alveole pulmonare</Word>
-					<Word></Word>
-				</Words>
-			</Category>
-			
-			<Category name = "Ceula">
-				<Word>Unitatea de baza, structurala si functionala!</Word>
-				<Word>Procariote</Word>
-				<Word>Eucariote</Word>
-				<Word>Archaea</Word>
-				<Word>Bacterii</Word>
-				<Word>Nucleu</Word>
-				<Word>Membrana</Word>
-				<Word>Citoplasma</Word>
-				<Word>Mitoza</Word>
-				<Word>Meioza</Word>
-				<Word>Diviziune</Word>
-				<Word>Haploide</Word>
-				<Word>Gameti</Word>
-				<Word>Spori</Word>
-			</Category> <!-- Celula -->
-			
-			</Subcategories>
-			
-			<Words>
-				<Word>Clorofila</Word>
-				<Word>Copaci</Word>
-				<Word>Frunze</Word>
-				<Word>Tulpina</Word>
-				<Word>Animale</Word>
-				<Word>Organisme</Word>
-				<Word>Seminte</Word>
-				<Word>Fruct</Word>
-			</Words>
-			
-		</Category> <!-- Biologie -->
-    
-		<Category name = "Chimie">
+			<Category name = "Chimie">
 			
 			<Subcategories>
-			<Category name = "Substante">
-			
-				<Words>
-					<Word>Natriu</Word>
-					<Word>Clor</Word>
-					<Word>Fe</Word>
-					<Word>Mg</Word>
-					<Word>Ne</Word>
-					<Word>Pb</Word>
-					<Word>Ti</Word>	
-				</Words>
+				<Category name = "Substante">
 				
-			</Category> <!-- Substante -->
+					<Words>
+						<Word>Natriu</Word>
+						<Word>Clor</Word>
+						<Word>Fe</Word>
+						<Word>Mg</Word>
+						<Word>Ne</Word>
+						<Word>Pb</Word>
+						<Word>Ti</Word>	
+					</Words>
+					
+				</Category> <!-- Substante -->
 			
 			</Subcategories>
 			<Words>
@@ -202,8 +241,8 @@
 				<Word>Mendeleev</Word>
 			</Words>
 			
-		</Category> <!-- Chimie -->
-		
+			</Category> <!-- Chimie -->
+		</Subcategories>
 	</Category> <!-- Cultura generala -->
   </Categories>
 </CategoriesContainer> <!-- Questions -->

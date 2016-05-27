@@ -70,6 +70,8 @@ namespace KeepLearning
 			gameCanvas = canvas.GetComponent<Canvas>();
 			Category aux = GetRandomSubcategory (category);
 			ExtractElements (category,aux,rightWords,rightImages,wrongWords,wrongImages);
+
+            base.StartGame(domain,canvas);
 		}
 
 		internal override int GetPoints()

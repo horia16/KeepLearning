@@ -48,6 +48,7 @@ class SpeedFinding : MiniGame
 
         board = GameObject.Instantiate(boardPrefab);
         board.transform.SetParent(canvas.transform);
+        board.transform.localScale = Vector3.one;
 
         this.domain = domain;
         manager = this;
@@ -69,6 +70,9 @@ class SpeedFinding : MiniGame
 
             i++;
         }
+
+
+        base.StartGame(domain, canvas);
 
         Invoke("WriteDownCorrectCards", 0.5f);
     }
@@ -113,7 +117,7 @@ class SpeedFinding : MiniGame
 
         for (int i = 0; i < Cards.Count; i++)
         {
-            int tmp = UnityEngine.Random.Range(0, Points.Count - 1);
+            int tmp = UnityEngine.Random.Range(0, Points.Count);
             try
             {
                 Cards[i].gameObject.transform.position = Points[tmp];
