@@ -5,29 +5,32 @@ using System.Collections.Generic;
 
 namespace KeepLearning
 {
-	public class ElementsRemoverController : MonoBehaviour
+	public class ElementsRemoverController : MiniGame
 	{
-		public Text categoryName;
-		public Canvas gameCanvas;
-		public Button categoryButton;
-		public GameObject startPointUp;
-		public GameObject startPointDown;
-		public GameObject prefabText;
+		Text categoryName;
+		Canvas gameCanvas;
+		GameObject startPointUp;
+		GameObject startPointDown;
+		GameObject prefabButton;
 		public bool isStarted;
-		public GameObject startCanvas;
-		private Category category;
-		private IList<Category> wrongCategories;
-		private List<string> rightWords = new List<string>();
-		private List<string> rightImages = new List<string>();
-		private List<string> wrongWords = new List<string>();
-		private List<string> wrongImages = new List<string>();
-		private float time;
-		private int numberOfWrong;
+		Category category;
+		IList<Category> wrongCategories;
+		List<string> rightWords = new List<string>();
+		List<string> rightImages = new List<string>();
+		List<string> wrongWords = new List<string>();
+		List<string> wrongImages = new List<string>();
+		float time;
+		int numberOfWrong;
+		int point;
 
 
 		void Start()
 		{
 			isStarted = false;
+			categoryName = this.gameObject.GetComponentInChildren<Text>();
+			startPointUp = this.gameObject.transform.FindChild ("StartPointUp").gameObject;
+			startPointDown = this.gameObject.transform.FindChild ("startPointDown").gameObject;
+			prefabButton = Resources.Load <GameObject> ("Prefabs/ElementsRemover/ButtonPrefab");
 		}
 
 		void resizeCollider()
@@ -43,34 +46,40 @@ namespace KeepLearning
 		}
 
 		// to do resize collider
-		public void StartGame(Category category)
+		public override void StartGame(Category domain, GameObject canvas)
 		{
+			point = 0;
+			time = 0;
 			isStarted = true;
 			category.GetSubcategoriesElements ();
 			//resizeCollider ();
 			this.category = category;
+			gameCanvas = canvas.GetComponent<Canvas>();
 			Category aux = GetRandomSubcategory (category);
 			ExtractElements (category,aux,rightWords,rightImages,wrongWords,wrongImages);
 		}
 
-		public void StopGame(bool win)
+		internal override int GetPoints()
+		{
+			return point;
+		}
+
+
+		internal override void GameFinished()
 		{
 			isStarted = false;
-
-			startCanvas.gameObject.SetActive (true);
-			gameCanvas.gameObject.SetActive (false);
-
 		}
 
 		public void ButtonClick(GameObject button)
 		{
 			if (button.GetComponent<GameItem>().IsCorectItem == true)
 			{
+				point++;
 				Destroy (button);
 			}
 			else
 			{
-				StopGame (false);
+				GameFinished ();
 			}
 		}
 
@@ -85,7 +94,7 @@ namespace KeepLearning
 					int index;
 					if (rightWords.Count == 0 && rightImages.Count == 0)
 					{
-						StopGame (true);
+						GameFinished ();
 					}
 
 					if (numberOfWrong == 0)
@@ -102,9 +111,9 @@ namespace KeepLearning
 							
 							int aux = Random.Range (0, rightWords.Count);
 
-							prefabText.GetComponentInChildren<Text>().text = rightWords [aux];
+							prefabButton.GetComponentInChildren<Text>().text = rightWords [aux];
 							rightWords.RemoveAt (aux);
-							LoadElement (prefabText, true);
+							LoadElement (prefabButton, true);
 						}
 						else
 						{
@@ -131,8 +140,8 @@ namespace KeepLearning
 						if (index == 0)
 						{
 							int aux = Random.Range (0, wrongWords.Count);
-							prefabText.GetComponentInChildren<Text>().text = wrongWords [aux];
-							LoadElement (prefabText, false);
+							prefabButton.GetComponentInChildren<Text>().text = wrongWords [aux];
+							LoadElement (prefabButton, false);
 						}
 						else
 						{
@@ -158,7 +167,6 @@ namespace KeepLearning
 			element.AddComponent <ElementMover>();
 			element.AddComponent <GameItem> ();
 			element.GetComponent <Button>().onClick.AddListener (() => ButtonClick(element));
-			element.GetComponent <ElementMover> ().mother = this;
 			element.GetComponent <GameItem> ().IsCorectItem = IsCorectItem;
 		}
 
