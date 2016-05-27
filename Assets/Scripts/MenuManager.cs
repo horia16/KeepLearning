@@ -29,6 +29,9 @@ namespace KeepLearning
 
             ElementsRemoverGame = Resources.Load<GameObject>("Prefabs/ElementsRemover/Game");
             ElementsRemoverMenu = Resources.Load<GameObject>("Prefabs/ElementsRemover/Menu");
+
+            SpeedFindingGame = Resources.Load<GameObject>("Prefabs/SpeedFinding/Game");
+            SpeedFindingMenu = Resources.Load<GameObject>("Prefabs/SpeedFinding/Menu");
         }
 
         public void CloseMenu(GameObject Object)
@@ -56,6 +59,14 @@ namespace KeepLearning
 		{
 			OpenCategoryInfoMenu(ElementsRemoverMenu, ElementsRemoverGame);
 		}
+        
+        GameObject SpeedFindingGame;
+        GameObject SpeedFindingMenu;
+
+        public void SpeedFindingGameSelected()
+        {
+            OpenCategoryInfoMenu(SpeedFindingMenu, SpeedFindingGame);
+        }
 
         public void OpenCategoryInfoMenu(GameObject menuPrefab, GameObject miniGamePrefab)
         {

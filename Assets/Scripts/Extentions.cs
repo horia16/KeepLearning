@@ -26,4 +26,17 @@ static class Extentions
         return listToClone.Select(item => (T)item.Clone()).ToList();
     }
 
+    public static List<GameObject> GetChildrenWithTag(this Transform me,string tag)
+    {
+        List<GameObject> result = new List<GameObject>();
+
+        foreach(Transform child in me)
+        {
+            if(child.tag == tag)
+                result.Add(child.gameObject);
+        }
+
+        return result;
+    }
+
 }
