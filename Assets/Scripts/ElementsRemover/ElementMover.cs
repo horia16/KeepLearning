@@ -6,7 +6,6 @@ namespace KeepLearning
 	public class ElementMover : MonoBehaviour {
 
 	    public int speed = 30;
-		public ElementsRemoverController mother;
 	    Vector3 direction;
 
 		void Start ()
@@ -34,8 +33,6 @@ namespace KeepLearning
 	    void Update()
 	    {
 	        this.transform.Translate(direction * speed * Time.deltaTime);
-			if (mother.isStarted == false)
-				Destroy (this.gameObject);
 	    }
 
 	}

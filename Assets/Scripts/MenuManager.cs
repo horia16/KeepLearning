@@ -26,6 +26,9 @@ namespace KeepLearning
 
             ElementsFinderGame = Resources.Load<GameObject>("Prefabs/ElementsFinder/Game");
             ElementsFinderMenu = Resources.Load<GameObject>("Prefabs/ElementsFinder/Menu");
+
+            ElementsRemoverGame = Resources.Load<GameObject>("Prefabs/ElementsRemover/Game");
+            ElementsRemoverMenu = Resources.Load<GameObject>("Prefabs/ElementsRemover/Menu");
         }
 
         public void CloseMenu(GameObject Object)
@@ -45,6 +48,14 @@ namespace KeepLearning
         {
             OpenCategoryInfoMenu(ElementsFinderMenu, ElementsFinderGame);
         }
+
+		GameObject ElementsRemoverGame;
+		GameObject ElementsRemoverMenu;
+
+		public void ElementsRemoverGameSelected()
+		{
+			OpenCategoryInfoMenu(ElementsRemoverMenu, ElementsRemoverGame);
+		}
 
         public void OpenCategoryInfoMenu(GameObject menuPrefab, GameObject miniGamePrefab)
         {
