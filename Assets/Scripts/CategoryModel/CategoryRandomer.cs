@@ -16,7 +16,7 @@ public static class CategoryRandomer
                 okCategories.Add(category);
         }
 
-		return okCategories[Random.Range (0, okCategories.Count - 1)];
+		return okCategories[Random.Range (0, okCategories.Count)];
     }
 
     public static IList<T> ChooseItems<T>(List<T> list, int number)
@@ -44,9 +44,10 @@ public static class CategoryRandomer
 		for (int i = 1; i <= number; i++)
 		{
 			int index = Random.Range (0, domain.Subcategories.Count);
-			while (canUseCategory (domain.Subcategories [index]))
+			while (domain.Subcategories[index].Words.Count <= 0 || !canUseCategory (domain.Subcategories [index]))
 				index = Random.Range (0, domain.Subcategories.Count);
-			res.Add (domain.Subcategories [index].Words[Random.Range(0,domain.Subcategories [index].Words.Count)]);
+            Debug.Log(domain.Subcategories[index]);
+			res.Add (domain.Subcategories [index].Words[Random.Range(0, domain.Subcategories [index].Words.Count)]);
 		}
     
 		return res;
@@ -59,7 +60,7 @@ public static class CategoryRandomer
 		for (int i = 1; i <= number; i++) 
 		{
 			int index = Random.Range (0, domain.Subcategories.Count);
-			while (canUseCategory (domain.Subcategories [index]))
+			while (domain.Subcategories[index].Images.Count <= 0 || !canUseCategory (domain.Subcategories [index]))
 				index = Random.Range (0, domain.Subcategories.Count);
 			res.Add (domain.Subcategories [index].Images[Random.Range(0,domain.Subcategories [index].Images.Count)]);
 		}

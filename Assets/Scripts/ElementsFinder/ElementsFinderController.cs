@@ -4,10 +4,8 @@ using UnityEngine.UI;
 
 public class ElementsFinderController : MiniGame
 {
-    public static int NumberOfCorectWords = 2;
-    public static int NumberOfCorectImages = 1;
-    public static int NumberOfWrongImages = 2;
-    public static int NumberOfWrongWords = 2;
+    public static int NumberOfCorectItems = 10;
+    public static int NumberOfWrongItems = 20;
 
     public GameObject ItemPrefab;
     public Transform GameSpace;
@@ -21,6 +19,8 @@ public class ElementsFinderController : MiniGame
     {
         Domain = domain;
         GameInfo.transform.SetParent(transform, false);
+
+        canvas.SetActive(false);
 
         Domain.GetSubcategoriesElements();
         Domain.DestroyUnusedSubcategories();
@@ -54,30 +54,35 @@ public class ElementsFinderController : MiniGame
         if (CorectCategory == null)
             throw new System.Exception("No category match!");
 
-        AddImages(CategoryRandomer.ChooseItems(CorectCategory.Images, NumberOfCorectImages), true);
-        AddWords(CategoryRandomer.ChooseItems(CorectCategory.Words, NumberOfCorectWords), true);
+        AddImages(CategoryRandomer.ChooseItems(CorectCategory.Images, Mathf.Min(NumberOfCorectItems, CorectCategory.Images.Count)), true);
+        if(CorectCategory.Images.Count < NumberOfCorectItems)
+            AddWords(CategoryRandomer.ChooseItems(CorectCategory.Words, 
+                Mathf.Min(NumberOfCorectItems - CorectCategory.Images.Count, CorectCategory.Words.Count)), true);
 
         GameItem.GameItemChoosed += ItemChoosed;
     }
 
     void AddIncorectItems(Category CorectCategory)
     {
-        AddWords(CategoryRandomer.GetRandomWords(Domain, NumberOfWrongWords,
+        int imagesNumber = Domain.Images.Count - CorectCategory.Images.Count;
+        AddImages(CategoryRandomer.GetRandomImages(Domain, Mathf.Min(NumberOfWrongItems, imagesNumber),
             delegate (Category category)
             {
                 return category != CorectCategory;
             }), false);
-            
-        AddImages(CategoryRandomer.GetRandomImages(Domain, NumberOfWrongImages,
-            delegate (Category category)
-            {
-                return category != CorectCategory;
-            }), false);
+
+        if(imagesNumber < NumberOfWrongItems)
+            AddWords(CategoryRandomer.GetRandomWords(Domain, 
+                Mathf.Min(NumberOfWrongItems - imagesNumber, Domain.Words.Count - CorectCategory.Words.Count),
+                delegate (Category category)
+                {
+                    return category != CorectCategory;
+                }), false);
     }
 
     public static bool CanBeCorectCategory(Category category)
     {
-        if (category.Words.Count >= NumberOfCorectWords && category.Images.Count >= NumberOfCorectImages)
+        if (category.Words.Count + category.Images.Count >= NumberOfCorectItems)
             return true;
         else
             return false;
@@ -85,7 +90,7 @@ public class ElementsFinderController : MiniGame
 
     public static bool CanBeCorectCategory(CategoryInfo category)
     {
-        if (category.WordsCount >= NumberOfCorectWords && category.ImagesCount >= NumberOfCorectImages)
+        if (category.WordsCount + category.ImagesCount >= NumberOfCorectItems)
             return true;
         else
             return false;
@@ -120,7 +125,7 @@ public class ElementsFinderController : MiniGame
         if(item.IsCorectItem)
         {
             CorectItemsCount++;
-            if (CorectItemsCount == NumberOfCorectImages + NumberOfCorectWords)
+            if (CorectItemsCount == NumberOfCorectItems)
                 GameFinished();
         }
         else
@@ -140,7 +145,7 @@ public class ElementsFinderController : MiniGame
 
     internal override int GetPoints()
     {
-        if (CorectItemsCount < NumberOfCorectImages + NumberOfCorectWords)
+        if (CorectItemsCount < NumberOfCorectItems)
             return 0;
         else
             return CorectItemsCount;

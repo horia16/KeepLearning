@@ -18,7 +18,7 @@ public class ElementsFinderMenu : CategoriesInfoMenu
 
         return okCategory != null && category.WordsCount + category.ImagesCount -
                             okCategory.WordsCount - okCategory.ImagesCount >=
-                            ElementsFinderController.NumberOfWrongImages + ElementsFinderController.NumberOfWrongImages;
+                            ElementsFinderController.NumberOfWrongItems;
     }
 
     public override bool CanChoose(CategoryInfo category)

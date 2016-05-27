@@ -28,7 +28,6 @@ namespace KeepLearning
 		void Awake()
 		{
 			isStarted = false;
-			scoreText = this.gameObject.transform.FindChild ("Score").GetComponent <Text> ();
 			startPointUp = this.gameObject.transform.FindChild ("StartPointUp").gameObject;
 			startPointDown = this.gameObject.transform.FindChild ("StartPointDown").gameObject;
 			prefabButton = Resources.Load <GameObject> ("Prefabs/ElementsRemover/ButtonPrefab");
@@ -60,7 +59,6 @@ namespace KeepLearning
 		public override void StartGame(Category domain, GameObject canvas)
 		{
 			point = 0;
-			ScoreUpdate ();
 			time = 0;
 			isStarted = true;
 			domain.GetSubcategoriesElements ();
@@ -69,10 +67,15 @@ namespace KeepLearning
 			this.category = domain;
 			gameCanvas = canvas.GetComponent<Canvas>();
 			Category aux = GetRandomSubcategory (category);
-			ExtractElements (category,aux,rightWords,rightImages,wrongWords,wrongImages);
 
             base.StartGame(domain,canvas);
-		}
+
+            ExtractElements(category, aux, rightWords, rightImages, wrongWords, wrongImages);
+
+            scoreText = Score;
+            ScoreUpdate();
+            timer.SetActive(false);
+        }
 
 		internal override int GetPoints()
 		{
@@ -106,7 +109,7 @@ namespace KeepLearning
 			if (isStarted)
 			{
 				time += Time.deltaTime;
-				if(time>=2)
+				if(time>=1)
 				{
 					time = 0;
 					int index;
@@ -213,7 +216,7 @@ namespace KeepLearning
 		{
 			rightWords.AddRange (wrongCategory.Words);
 			rightImagePath.AddRange (wrongCategory.Images);
-			categoryName.text = wrongCategory.Name;
+			SetCategory( wrongCategory);
 			wrongCategory.Words.Clear ();
 			wrongCategory.Images.Clear ();
 			wrongCategory.Subcategories.Clear ();

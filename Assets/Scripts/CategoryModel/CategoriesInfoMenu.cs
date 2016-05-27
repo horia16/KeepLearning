@@ -103,7 +103,7 @@ namespace KeepLearning
         {
             GameObject newButton = Instantiate(ButtonPrefab);
             newButton.GetComponentInChildren<Text>().text = category.Name;
-            newButton.transform.SetParent(ContentPanel.transform);
+            newButton.transform.SetParent(ContentPanel.transform, false);
             newButton.GetComponent<Button>().onClick.AddListener(delegate () { ChangeCategory(category); });
         }
 

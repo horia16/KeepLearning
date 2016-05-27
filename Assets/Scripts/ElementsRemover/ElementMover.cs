@@ -5,7 +5,7 @@ namespace KeepLearning
 {
 	public class ElementMover : MonoBehaviour {
 
-	    public int speed = 60;
+	    public int speed = 100;
 	    Vector3 direction;
 
 		void Start ()

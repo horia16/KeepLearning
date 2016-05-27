@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -97,10 +96,17 @@ namespace KeepLearning
 
             menu.OnCategoryChoosed += (CategoryInfo info) => 
 			{
-                GamePanel.SetActive(true);
+                OpenMenu(GamePanel);
                 CloseMenu(CategorySelectorMenu);
                 currentGame = Instantiate(miniGamePrefab).GetComponent<MiniGame>();
-                currentGame.OnGameFinished += (int points) => { this.points+=points; PlayerPrefs.SetInt("points",points); RefreshPoints(); PlayerPrefs.Save();};
+                currentGame.OnGameFinished += (int points) => {
+                    this.points+=points;
+                    PlayerPrefs.SetInt("points",points);
+                    RefreshPoints();
+                    PlayerPrefs.Save();
+                    CloseMenu(GamePanel);
+                    OpenMenu(GameSelectorMenu);
+                };
                 currentGame.StartGame(Category.GetCategory(info, CategoryPathXmlPath), GameSpace); 
 			};
 

@@ -48,6 +48,8 @@ class SpeedFinding : MiniGame
         board.transform.SetParent(canvas.transform,false);
 
         this.domain = domain;
+        domain.GetSubcategoriesElements();
+        domain.DestroyUnusedSubcategories();
         manager = this;
 
         Cards = new List<Card>();
@@ -56,7 +58,15 @@ class SpeedFinding : MiniGame
         Card.ClearEvent();
         Card.OnTap += OnTap;
 
-        int  i = 0;
+        base.StartGame(domain, canvas);
+
+        Invoke("WriteDownCorrectCards", 0.2f);
+    }
+        
+    void WriteDownCorrectCards()
+    {
+
+        int i = 0;
 
         foreach (GameObject go in board.transform.GetChildrenWithTag("Card"))
         {
@@ -68,15 +78,8 @@ class SpeedFinding : MiniGame
             i++;
         }
 
+        i = 0;
 
-        base.StartGame(domain, canvas);
-
-        Invoke("WriteDownCorrectCards", 0.2f);
-    }
-        
-    void WriteDownCorrectCards()
-    {
-        int i = 0;
         category = CategoryRandomer.ChooseSubcategory(domain, delegate (Category c) { return c.Words.Count >= 5; });
         CorrectContent = (List<string>)CategoryRandomer.ChooseItems(category.Words, 5);
 
@@ -97,7 +100,7 @@ class SpeedFinding : MiniGame
     void WriteDownRestOfCards()
     {
         int i = CorrectContent.Count;
-        OtherContent = (List<string>)CategoryRandomer.GetRandomWords(domain, 15, delegate (Category c) { return c == category; });
+        OtherContent = (List<string>)CategoryRandomer.GetRandomWords(domain, 15, delegate (Category c) { return c != category; });
 
         foreach (string c in OtherContent)
         {
@@ -112,15 +115,15 @@ class SpeedFinding : MiniGame
 
     void Shuffle()
     {
-        List<Vector2> Points = new List<Vector2>(this.Points);
+        List<Vector2> points = new List<Vector2>(Points);
 
         for (int i = 0; i < Cards.Count; i++)
         {
-            int tmp = UnityEngine.Random.Range(0, Points.Count);
+            int tmp = UnityEngine.Random.Range(0, points.Count);
             try
             {
-                Cards[i].gameObject.transform.position = Points[tmp];
-                Points.RemoveAt(tmp);
+                Cards[i].gameObject.transform.position = points[tmp];
+                points.RemoveAt(tmp);
             }
             catch { }
         }
@@ -139,7 +142,7 @@ class SpeedFinding : MiniGame
             Timer.StartCountDown(gameTime);
         }
 
-        Invoke("Shuffle", 5f);
+        Invoke("Shuffle", 1.5f);
     } 
 
     internal override int GetPoints()
