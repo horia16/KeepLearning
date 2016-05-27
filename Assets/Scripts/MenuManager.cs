@@ -2,6 +2,8 @@
 using System.IO;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace KeepLearning
 {
@@ -18,8 +20,14 @@ namespace KeepLearning
         string CategoryInfoXmlPath = Path.Combine(Environment.CurrentDirectory, "CategoryInfo.xml");
         string CategoryPathXmlPath = Path.Combine(Environment.CurrentDirectory, "Category.xml");
 
+		int points;
+		public List<Text> textPoints;
+
         public void Awake()
         {
+			points = PlayerPrefs.GetInt("points");
+			RefreshPoints ();
+			
             CategoriesInfoContainer = CategoryInfo.LoadCategoriesInfo(CategoryInfoXmlPath);
             CategoriesInfoContainer.GetSubcategoriesElements();
             CategoriesInfoContainer.SetBaseCategories();
@@ -33,6 +41,13 @@ namespace KeepLearning
             SpeedFindingGame = Resources.Load<GameObject>("Prefabs/SpeedFinding/Game");
             SpeedFindingMenu = Resources.Load<GameObject>("Prefabs/SpeedFinding/Menu");
         }
+
+		void RefreshPoints()
+		{
+			for (int i = 0; i < textPoints.Count; i++) {
+				textPoints [i].text = "Points: " + points.ToString ();
+			}
+		}
 
         public void CloseMenu(GameObject Object)
         {
@@ -81,6 +96,7 @@ namespace KeepLearning
 			{
                 CloseMenu(CategorySelectorMenu);
                 MiniGame miniGame = Instantiate(miniGamePrefab).GetComponent<MiniGame>();
+				miniGame.OnGameFinished += (int points) => { this.points+=points; PlayerPrefs.SetInt("points",points); RefreshPoints(); PlayerPrefs.Save();};
 				miniGame.StartGame(Category.GetCategory(info, CategoryPathXmlPath), GameSpace); 
 			};
 

@@ -28,7 +28,7 @@ namespace KeepLearning
 		void Awake()
 		{
 			isStarted = false;
-			scoreText = this.gameObject.GetComponentInChildren <Text> ();
+			scoreText = this.gameObject.transform.FindChild ("Score").GetComponent <Text> ();
 			startPointUp = this.gameObject.transform.FindChild ("StartPointUp").gameObject;
 			startPointDown = this.gameObject.transform.FindChild ("StartPointDown").gameObject;
 			prefabButton = Resources.Load <GameObject> ("Prefabs/ElementsRemover/ButtonPrefab");
@@ -49,6 +49,11 @@ namespace KeepLearning
 		void ScoreUpdate()
 		{
 			scoreText.text = "Score: " + point.ToString ();
+		}
+
+		public void Back()
+		{
+			GameFinished ();
 		}
 
 		// to do resize collider
@@ -76,6 +81,7 @@ namespace KeepLearning
 		internal override void GameFinished()
 		{
 			isStarted = false;
+			base.GameFinished ();
 		}
 
 		public void ButtonClick(GameObject button)
@@ -88,6 +94,7 @@ namespace KeepLearning
 			}
 			else
 			{
+				Destroy (button);
 				GameFinished ();
 			}
 		}
@@ -171,7 +178,7 @@ namespace KeepLearning
 		void LoadElement(GameObject element2, bool IsCorectItem)
 		{
 			GameObject element = GameObject.Instantiate (element2);
-			element.transform.SetParent (gameCanvas.gameObject.transform,false);
+			element.transform.SetParent (this.transform,false);
 			element.transform.position = new Vector3 (startPointDown.transform.position.x, Random.Range (startPointDown.transform.position.y, startPointUp.transform.position.y), 0f);
 			element.AddComponent <ElementMover>();
 			element.AddComponent <GameItem> ();

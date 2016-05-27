@@ -2,133 +2,208 @@
 <CategoriesContainer>
   <Categories>
     
-    <Category name = "Mate">
-      <Subcategories>
-      
-        <Category name = "Geometrie">
-          <Subcategories>
-            
-            <Category name = "Triunghi">
-              <Words>
-                <Word>a + b > c</Word>
-                <Word>3 laturi</Word>
-                <Word>180 de grade</Word>
-                <Word>a + b > c</Word>
-                <Word>3 laturi</Word>
-                <Word>180 de grade</Word>
-                <Word>a + b > c</Word>
-                <Word>3 laturi</Word>
-                <Word>180 de grade</Word>
-                <Word>a + b > c</Word>
-                <Word>3 laturi</Word>
-                <Word>180 de grade</Word>
-                <Word>a + b > c</Word>
-                <Word>3 laturi</Word>
-                <Word>180 de grade</Word>
-                <Word>a + b > c</Word>
-                <Word>3 laturi</Word>
-                <Word>180 de grade</Word>
-                <Word>a + b > c</Word>
-                <Word>3 laturi</Word>
-                <Word>180 de grade</Word>
-                <Word>a + b > c</Word>
-                <Word>3 laturi</Word>
-                <Word>180 de grade</Word>
-                <Word>a + b > c</Word>
-                <Word>3 laturi</Word>
-                <Word>180 de grade</Word>
-                <Word>a + b > c</Word>
-                <Word>3 laturi</Word>
-                <Word>180 de grade</Word>
-                <Word>a + b > c</Word>
-                <Word>3 laturi</Word>
-                <Word>180 de grade</Word>
-                <Word>a + b > c</Word>
-                <Word>3 laturi</Word>
-                <Word>180 de grade</Word>
-                <Word>a + b > c</Word>
-                <Word>3 laturi</Word>
-                <Word>180 de grade</Word>
-                <Word>a + b > c</Word>
-                <Word>3 laturi</Word>
-                <Word>180 de grade</Word>
-              </Words>
-                
-              <Images>
-                <Image>Mate/Geometrie/Triunghi/0</Image>
-                <Image>Mate/Geometrie/Triunghi/1</Image>
-              </Images>
-            </Category> <!-- Triunghi -->
+	<Category name = "Cultura generala">
+		<Category name = "Mate">
+		  <Subcategories>
+		  
+			<Category name = "Geometrie">
+			  <Subcategories>
+				
+				<Category name = "Triunghi">
+				  <Words>
+					<Word>Echilateral</Word>
+					<Word>Isoscel</Word>
+					<Word>Scalen</Word>
+					<Word>Are 3 laturi!</Word>
+					<Word>Triunghi dreptunghic</Word>
+				  </Words>
+					
+				  <Images>
+					
+				  </Images>
+				</Category> <!-- Triunghi -->
 
-            <Category name = "Patrat">
-              <Words>
-                <Word>laturi egale</Word>
-                <Word>4 laturi</Word>
-                <Word>360 de grade</Word>
-                <Word>laturi egale</Word>
-                <Word>4 laturi</Word>
-                <Word>360 de grade</Word>
-                <Word>laturi egale</Word>
-                <Word>4 laturi</Word>
-                <Word>360 de grade</Word>
-                <Word>laturi egale</Word>
-                <Word>4 laturi</Word>
-                <Word>360 de grade</Word>
-                <Word>laturi egale</Word>
-                <Word>4 laturi</Word>
-                <Word>360 de grade</Word>
-                <Word>laturi egale</Word>
-                <Word>4 laturi</Word>
-                <Word>360 de grade</Word>
-                <Word>laturi egale</Word>
-                <Word>4 laturi</Word>
-                <Word>360 de grade</Word>
-              </Words>
+				<Category name = "Patrat">
+				  <Words>
+					<Word>Are 4 laturi!</Word>
+					<Word>Patrulater regulat!</Word>
+					<Word>Patrulater inscriptibil!</Word>
+				  </Words>
 
-              <Images>
-                <Image>Mate/Geometrie/Patrat/0</Image>
-                <Image>Mate/Geometrie/Patrat/1</Image>
-              </Images>
-            </Category> <!-- Patrat -->
-            
-          </Subcategories>
-        </Category> <!-- Geometrie -->
-  
-        <Category name = "Algebra">
-      
-          <Words>
-            <Word>1 + 1 = 2</Word>
-            <Word>Relatia lui Shumen</Word>
-            <Word>Tata lui Papaete</Word>
-            <Word>1 + 1 = 2</Word>
-            <Word>Relatia lui Shumen</Word>
-            <Word>Tata lui Papaete</Word>
-            <Word>1 + 1 = 2</Word>
-            <Word>Relatia lui Shumen</Word>
-            <Word>Tata lui Papaete</Word>
-            <Word>1 + 1 = 2</Word>
-            <Word>Relatia lui Shumen</Word>
-            <Word>Tata lui Papaete</Word>
-            <Word>1 + 1 = 2</Word>
-            <Word>Relatia lui Shumen</Word>
-            <Word>Tata lui Papaete</Word>
-          </Words>
-          
-          <Images>
-            <Image>Mate/Algebra/0</Image>
-            <Image>Mate/Algebra/1</Image>
-          </Images>
-      
-        </Category> <!-- Algebra -->
-   
-      </Subcategories>
+				  <Images>
+					
+				  </Images>
+				</Category> <!-- Patrat -->
+				<Word>Patrulater</Word>
+				<Word>Unghi de 180 de grade!</Word>
+				<Word>Unghi drept</Word>
+				<Word>Linie</Word>
+				<Word>Punct</Word>
+				<Word>Cerc</Word>
+				<Word>Pitagora</Word>
+			  </Subcategories>
+			</Category> <!-- Geometrie -->
+	  
+			<Category name = "Algebra">
+				<Subcategories>
+					<Category name = "Calcule">
+					
+						<Words>
+							<Word>1+1=2</Word>
+							<Word>x+4=3</Word>
+							<Word>140:2=?</Word>
+							<Word>(25+25)-3*0=?</Word>
+							<Word>(1+2+3+...+n)=n*(n+1):2</Word>
+						</Words>
+						
+						<Images>
+						</Images>
+					
+					</Category> <!-- Calcule -->
+				</Subcategories>
+		  
+			</Category> <!-- Algebra -->
+	   
+			<Category name = "Simboluri matematice">
+			
+				<Images> 
+					<Image>Mate/SimboluriMatematice/0</Image>
+					<Image>Mate/SimboluriMatematice/1</Image>
+					<Image>Mate/SimboluriMatematice/2</Image>
+					<Image>Mate/SimboluriMatematice/3</Image>
+					<Image>Mate/SimboluriMatematice/4</Image>
+					<Image>Mate/SimboluriMatematice/5</Image>
+					<Image>Mate/SimboluriMatematice/6</Image>
+					<Image>Mate/SimboluriMatematice/7</Image>
+					<Image>Mate/SimboluriMatematice/8</Image>
+					<Image>Mate/SimboluriMatematice/9</Image>
+					<Image>Mate/SimboluriMatematice/10</Image>
+					<Image>Mate/SimboluriMatematice/11</Image>
+					<Image>Mate/SimboluriMatematice/12</Image>
+					<Image>Mate/SimboluriMatematice/13</Image>
+					<Image>Mate/SimboluriMatematice/14</Image>
+					<Image>Mate/SimboluriMatematice/15</Image>
+					<Image>Mate/SimboluriMatematice/16</Image>
+				</Images>
+				
+			</Category> <!-- Simboluri matematice -->
+		  
+		  </Subcategories>
+		
+		  <Words>
+			<Word>Pitagora</Word>
+			<Word>Euclid</Word>
+			<Word>Papus</Word>
+			<Word>Bernoulli</Word>
+			<Word>Ceva</Word>
+			<Word>Fibonacci</Word>
+			<Word>Tales</Word>
+			<Word>Pascal</Word>
+		  </Words>    
+		</Category> <!-- Mate -->
+		
+		<Category name = "Biologie">
+		
+			<Subcategories>
+		
+			<Category name = "Sistemul circulator">
+				<Words>
+					<Word>Inima</Word>
+					<Word>Artere</Word>
+					<Word>Vene</Word>
+					<Word>Sange</Word>
+					<Word>Ventricule</Word>
+					<Word>Capilare</Word>
+					<Word>Diastola</Word>
+					<Word>Sistola</Word>
+					<Word>Circulatia mica</Word>
+					<Word>Circulatia mare</Word>
+				</Words>
+				
+				
+			</Category> <!-- Sistemul circulator -->
+			
+			<Category name = "Sistemul respirator">
+				<Words>
+					<Word>Plamanii</Word>
+					<Word>Branhii</Word>
+					<Word>Trahee</Word>
+					<Word>Respiratie activa</Word>
+					<Word>Respiratie externa</Word>
+					<Word>Faringe</Word>
+					<Word>Laringe</Word>
+					<Word>Bronhii</Word>
+					<Word>Alveole pulmonare</Word>
+					<Word></Word>
+				</Words>
+			</Category>
+			
+			<Category name = "Ceula">
+				<Word>Unitatea de baza, structurala si functionala!</Word>
+				<Word>Procariote</Word>
+				<Word>Eucariote</Word>
+				<Word>Archaea</Word>
+				<Word>Bacterii</Word>
+				<Word>Nucleu</Word>
+				<Word>Membrana</Word>
+				<Word>Citoplasma</Word>
+				<Word>Mitoza</Word>
+				<Word>Meioza</Word>
+				<Word>Diviziune</Word>
+				<Word>Haploide</Word>
+				<Word>Gameti</Word>
+				<Word>Spori</Word>
+			</Category> <!-- Celula -->
+			
+			</Subcategories>
+			
+			<Words>
+				<Word>Clorofila</Word>
+				<Word>Copaci</Word>
+				<Word>Frunze</Word>
+				<Word>Tulpina</Word>
+				<Word>Animale</Word>
+				<Word>Organisme</Word>
+				<Word>Seminte</Word>
+				<Word>Fruct</Word>
+			</Words>
+			
+		</Category> <!-- Biologie -->
     
-      <Words>
-        <Word>Domnul Marsanu</Word>
-        <Word>Concurs Sinaia 2016</Word>
-        <Word>Arthur Balauta</Word>
-      </Words>    
-    </Category> <!-- Mate -->
-    
+		<Category name = "Chimie">
+			
+			<Subcategories>
+			<Category name = "Substante">
+			
+				<Words>
+					<Word>Natriu</Word>
+					<Word>Clor</Word>
+					<Word>Fe</Word>
+					<Word>Mg</Word>
+					<Word>Ne</Word>
+					<Word>Pb</Word>
+					<Word>Ti</Word>	
+				</Words>
+				
+			</Category> <!-- Substante -->
+			
+			</Subcategories>
+			<Words>
+				<Word>Reactii</Word>
+				<Word>Carboxil</Word>
+				<Word>Alcani</Word>
+				<Word>Izoalcani</Word>
+				<Word>Cicloalcani</Word>
+				<Word>Alchiene</Word>
+				<Word>Alchine</Word>
+				<Word>Arene</Word>
+				<Word>Grasimi</Word>
+				<Word>Proteine</Word>
+				<Word>Mendeleev</Word>
+			</Words>
+			
+		</Category> <!-- Chimie -->
+		
+	</Category> <!-- Cultura generala -->
   </Categories>
 </CategoriesContainer> <!-- Questions -->
