@@ -12,6 +12,7 @@ namespace KeepLearning
 		GameObject startPointUp;
 		GameObject startPointDown;
 		GameObject prefabButton;
+		Text scoreText;
 		public bool isStarted;
 		Category category;
 		IList<Category> wrongCategories;
@@ -27,6 +28,7 @@ namespace KeepLearning
 		void Awake()
 		{
 			isStarted = false;
+			scoreText = this.gameObject.GetComponentInChildren <Text> ();
 			startPointUp = this.gameObject.transform.FindChild ("StartPointUp").gameObject;
 			startPointDown = this.gameObject.transform.FindChild ("StartPointDown").gameObject;
 			prefabButton = Resources.Load <GameObject> ("Prefabs/ElementsRemover/ButtonPrefab");
@@ -44,10 +46,16 @@ namespace KeepLearning
 			collider.offset = new Vector2 (0, 0);
 		}
 
+		void ScoreUpdate()
+		{
+			scoreText.text = "Score: " + point.ToString ();
+		}
+
 		// to do resize collider
 		public override void StartGame(Category domain, GameObject canvas)
 		{
 			point = 0;
+			ScoreUpdate ();
 			time = 0;
 			isStarted = true;
 			domain.GetSubcategoriesElements ();
@@ -75,6 +83,7 @@ namespace KeepLearning
 			if (button.GetComponent<GameItem>().IsCorectItem == true)
 			{
 				point++;
+				ScoreUpdate ();
 				Destroy (button);
 			}
 			else
@@ -88,7 +97,7 @@ namespace KeepLearning
 			if (isStarted)
 			{
 				time += Time.deltaTime;
-				if(time>=4)
+				if(time>=2)
 				{
 					time = 0;
 					int index;
