@@ -1,10 +1,6 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 class Fade : MonoBehaviour
 {
