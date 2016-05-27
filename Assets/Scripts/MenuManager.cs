@@ -107,11 +107,7 @@ namespace KeepLearning
             menu.OnBack += () => { GameSelectorMenu.SetActive(true); };
             menu = null;
         }
-
-        public void BackFromGame()
-        {
-            currentGame.GameFinished();
-        }
+        
 
     }
 }

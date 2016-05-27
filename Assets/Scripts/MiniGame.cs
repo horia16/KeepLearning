@@ -17,6 +17,11 @@ public class MiniGame : MonoBehaviour
 
     static GameObject gameBorderPrefab;
 
+    internal void SetCategory(Category c)
+    {
+        Border.transform.GetDeepChild("CategoryName").GetComponent<Text>().text = c.Name;
+    }
+
     public virtual void StartGame(Category domain, GameObject canvas)
     {
         if (gameBorderPrefab == null)
@@ -32,6 +37,7 @@ public class MiniGame : MonoBehaviour
 
         Timer = Border.transform.GetDeepChild("Timer").gameObject;
         Score = Border.transform.GetDeepChild("Score").GetComponent<Text>();
+        Border.transform.GetDeepChild("Back").GetComponent<Button>().onClick.AddListener(() => GameFinished() );
     }
 
     internal virtual int GetPoints()
@@ -45,7 +51,7 @@ public class MiniGame : MonoBehaviour
         Domain = null;
     }
 
-    internal virtual void GameFinished()
+    public virtual void GameFinished()
     {
         Destroy(Border);
         if (OnGameFinished != null)

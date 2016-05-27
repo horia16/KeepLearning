@@ -80,7 +80,7 @@ namespace KeepLearning
 		}
 
 
-		internal override void GameFinished()
+		public override void GameFinished()
 		{
 			isStarted = false;
 			base.GameFinished ();

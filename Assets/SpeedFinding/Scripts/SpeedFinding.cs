@@ -74,7 +74,7 @@ class SpeedFinding : MiniGame
 
         base.StartGame(domain, canvas);
 
-        Invoke("WriteDownCorrectCards", 0.5f);
+        Invoke("WriteDownCorrectCards", 0.2f);
     }
         
     void WriteDownCorrectCards()
@@ -82,7 +82,9 @@ class SpeedFinding : MiniGame
         int i = 0;
         category = CategoryRandomer.ChooseSubcategory(domain, delegate (Category c) { return c.Words.Count >= 5; });
         CorrectContent = (List<string>)CategoryRandomer.ChooseItems(category.Words, 5);
-        
+
+        SetCategory(category);
+
         foreach (string c in CorrectContent)
         {
             Cards[i].SetUp(c, false, true);
