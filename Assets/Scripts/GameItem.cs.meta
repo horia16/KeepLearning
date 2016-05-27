@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scripts/GameItem.cs.meta
+guid: ad3b8eeb7271263459ede18d3755bda4
+timeCreated: 1464266373
+=======
+guid: 62e2beb0c6db38848ac8437cecdaefa7
+timeCreated: 1464266303
+>>>>>>> 26964ee66dbd03b60884b305560aad40f388cecf:Assets/Scripts/GameItem.cs.meta
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
