@@ -8,11 +8,16 @@ using System.Text;
 
 class Card: MonoBehaviour
 {
-    public delegate void Action(bool parameter);
+    public delegate void Action(Card who,bool parameter);
     public static event Action OnTap;
 
 
     private bool correct;
+
+    public static void ClearEvent()
+    {
+        OnTap = null;
+    }
 
     public void SetUp(string content,bool image,bool correct)
     {
@@ -32,11 +37,23 @@ class Card: MonoBehaviour
     
         Text  txt = child.AddComponent<Text>();
         txt.text = content;
-        txt.resizeTextForBestFit = true;
         txt.color = Color.white;
-        txt.font = Font.CreateDynamicFontFromOSFont("Arial",12);
-        gameObject.GetComponent<Button>().onClick.AddListener(() => Tap());
+        txt.font = Font.CreateDynamicFontFromOSFont("Arial",10);
 
+        txt.resizeTextForBestFit = true;
+
+        ((RectTransform)child.transform).anchorMin = Vector2.zero;
+        ((RectTransform)child.transform).anchorMax = Vector2.one;
+        ((RectTransform)child.transform).offsetMin = Vector2.zero;
+        ((RectTransform)child.transform).offsetMax = Vector2.zero;
+        ((RectTransform)child.transform).localScale = Vector3.one;
+        
+
+    }
+
+    public void AddTapEvent()
+    {
+        gameObject.GetComponent<Button>().onClick.AddListener(() => Tap());
     }
 
     public void Tap()
@@ -46,10 +63,10 @@ class Card: MonoBehaviour
         tmp.FadeDown(0.5f);
         tmp.OnFinish += Over;
 
-        Destroy(gameObject.transform.GetChild(0).GetComponent<Button>());
+        Destroy(gameObject.GetComponent<Button>());
 
         if(OnTap!=null)
-            OnTap(correct);
+            OnTap(this,correct);
     }
 
     public void Over()
