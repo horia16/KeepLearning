@@ -8,8 +8,7 @@ public class GameItem : MonoBehaviour, IMovable
 
     public virtual void Tap()
     {
-        if (GameItemChoosed != null)
-            GameItemChoosed(this);
+        ItemChoosed();
     }
 
     public virtual void Drag()
@@ -20,5 +19,15 @@ public class GameItem : MonoBehaviour, IMovable
     public virtual void Drop()
     {
 
+    }
+
+    internal void ItemChoosed()
+    {
+        GameItemChoosed(this);
+    }
+
+    public static void Refresh()
+    {
+        GameItemChoosed = null;
     }
 }

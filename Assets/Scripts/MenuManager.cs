@@ -22,6 +22,7 @@ namespace KeepLearning
         {
             CategoriesInfoContainer = CategoryInfo.LoadCategoriesInfo(CategoryInfoXmlPath);
             CategoriesInfoContainer.GetSubcategoriesElements();
+            CategoriesInfoContainer.SetBaseCategories();
 
             ElementsFinderGame = Resources.Load<GameObject>("Prefabs/ElementsFinder/Game");
             ElementsFinderMenu = Resources.Load<GameObject>("Prefabs/ElementsFinder/Menu");
@@ -51,7 +52,7 @@ namespace KeepLearning
             OpenMenu(CategorySelectorMenu);
             CategoriesInfoMenu menu = Instantiate(menuPrefab).GetComponent<CategoriesInfoMenu>();
 
-            menu.transform.SetParent(CategorySelectorMenu.transform);
+            menu.transform.SetParent(CategorySelectorMenu.transform, false);
             menu.SetContainer(CategoriesInfoContainer);
 
             menu.OnCategoryChoosed += (CategoryInfo info) => 

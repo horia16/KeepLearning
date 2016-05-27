@@ -113,7 +113,7 @@ namespace KeepLearning
                 BackButtonText.text = "GamesMenu";
             else
                 if (ActualCategory.BaseCategory == null)
-                BackButtonText.text = "Principal Categories";
+                    BackButtonText.text = "Principal Categories";
                 else
                     BackButtonText.text = ActualCategory.BaseCategory.Name;
         }

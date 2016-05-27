@@ -6,9 +6,16 @@ using UnityEngine;
 
 class ElementsFinderItem : GameItem
 {
+    RectTransform rect;
+
+    void Awake()
+    {
+        rect = (RectTransform)transform;
+    }
+
     public override void Drag()
     {
-        base.Drag();
+        rect.anchoredPosition += Input.touches[0].deltaPosition;
     }
 
     public void SetRandom()
@@ -21,10 +28,9 @@ class ElementsFinderItem : GameItem
         float panelW = ((RectTransform)transform.parent).rect.width;
         float panelH = ((RectTransform)transform.parent).rect.height;
 
-        float X = UnityEngine.Random.Range(width / 2, panelW - width / 2);
-        float Y = UnityEngine.Random.Range(height / 2, panelH - height / 2);
+        float X = UnityEngine.Random.Range(- panelW / 2 + width / 2, panelW / 2 - width / 2);
+        float Y = UnityEngine.Random.Range(-panelH / 2 + height / 2, panelH / 2 - height / 2);
 
-       // ((RectTransform)transform).offsetMin = new Vector2(X + width / 2, Y - height / 2);
-        //((RectTransform)transform).offsetMax = new Vector2(X - width / 2, Y + height / 2);
+        ((RectTransform)transform).anchoredPosition = new Vector2(X, Y);
     }
 }

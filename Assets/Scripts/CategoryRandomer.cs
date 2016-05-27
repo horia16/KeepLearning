@@ -37,14 +37,14 @@ public static class CategoryRandomer
 		return res;
 	}
 
-    internal static IList<string> GetRandomWords(Category domain, int number, System.Func<Category, bool> IsCorectCategory)
+    internal static IList<string> GetRandomWords(Category domain, int number, System.Func<Category, bool> canUseCategory)
     {
 		IList<string> res = new List<string>();
 
 		for (int i = 1; i <= number; i++)
 		{
 			int index = Random.Range (0, domain.Subcategories.Count);
-			while (IsCorectCategory (domain.Subcategories [index]) == false)
+			while (canUseCategory (domain.Subcategories [index]))
 				index = Random.Range (0, domain.Subcategories.Count);
 			res.Add (domain.Subcategories [index].Words[Random.Range(0,domain.Subcategories [index].Words.Count)]);
 		}
@@ -52,14 +52,14 @@ public static class CategoryRandomer
 		return res;
 	}
 
-    internal static IList<string> GetRandomImages(Category domain, int numberOfWrongImages, System.Func<Category, bool> p)
+    internal static IList<string> GetRandomImages(Category domain, int number, System.Func<Category, bool> canUseCategory)
     {
 		IList<string> res = new List<string>();
 
-		for (int i = 1; i <= numberOfWrongImages; i++) 
+		for (int i = 1; i <= number; i++) 
 		{
 			int index = Random.Range (0, domain.Subcategories.Count);
-			while (p (domain.Subcategories [index]) == false)
+			while (canUseCategory (domain.Subcategories [index]))
 				index = Random.Range (0, domain.Subcategories.Count);
 			res.Add (domain.Subcategories [index].Images[Random.Range(0,domain.Subcategories [index].Images.Count)]);
 		}

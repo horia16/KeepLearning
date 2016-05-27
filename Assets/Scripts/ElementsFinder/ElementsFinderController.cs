@@ -13,6 +13,7 @@ public class ElementsFinderController : MiniGame
 
     public GameObject ItemPrefab;
     public Transform GameSpace;
+    public Text ScoreText;
 
     public int CorectItemsCount;
     public int WrongItemsCount;
@@ -30,14 +31,18 @@ public class ElementsFinderController : MiniGame
     {
         GameSpace = transform.FindChild("Game space");
         ItemPrefab = Resources.Load<GameObject>("Prefabs/ElementsFinder/Item");
+        ScoreText = transform.FindChild("Score").GetComponent<Text>();
     }
 
     void Initialize()
     {
         CorectCategory = CategoryRandomer.ChooseSubcategory(Domain, CanBeCorectCategory);
         transform.FindChild("CategoryName").GetComponent<Text>().text = CorectCategory.Name;
+
         AddCorectItems();
         AddIncorectItems();
+
+        RefreshScore();
     }
 
     void AddCorectItems()
@@ -121,8 +126,13 @@ public class ElementsFinderController : MiniGame
             if (WrongItemsCount > 3)
                 GameFinished();
         }
-
+        RefreshScore();
         Destroy(item);
+    }
+
+    void RefreshScore()
+    {
+        ScoreText.text = "Corect: " + CorectItemsCount + " Wrong: " + WrongItemsCount;
     }
 
     internal override int GetPoints()
@@ -131,5 +141,10 @@ public class ElementsFinderController : MiniGame
             return 0;
         else
             return CorectItemsCount;
+    }
+
+    internal override void Refresh()
+    {
+        GameItem.Refresh();
     }
 }
