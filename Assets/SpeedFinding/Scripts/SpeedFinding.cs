@@ -19,13 +19,30 @@ class SpeedFinding : MiniGame
     
     Category domain, category;
 
-    public static void OnTap(Card c)
+    int score;
+    int nr;
+   public  int guessed;
+
+    public void OnTap(Card c,bool correct)
     {
         manager.Cards.Remove(c);
+        if (correct)
+        {
+            score++;
+            guessed++;
+            if(guessed==5)
+            {
+                GameFinished();
+            }
+        }
+        else
+            score--;
     }
 
     public override void StartGame(Category domain, GameObject canvas)
     {
+        guessed = score = nr = 0;
+
         if (boardPrefab == null)
             boardPrefab = Resources.Load<GameObject>("SpeedFinding\\Prefabs\\Board");
 
@@ -37,6 +54,9 @@ class SpeedFinding : MiniGame
 
         Cards = new List<Card>();
         Points = new List<Vector2>();
+
+        Card.ClearEvent();
+        Card.OnTap += OnTap;
 
         int  i = 0;
 
@@ -74,7 +94,7 @@ class SpeedFinding : MiniGame
     void WriteDownRestOfCards()
     {
         int i = CorrectContent.Count;
-        OtherContent = (List<string>)CategoryRandomer.GetRandomWords(domain, 15, delegate (Category c) { return c != category; });
+        OtherContent = (List<string>)CategoryRandomer.GetRandomWords(domain, 15, delegate (Category c) { return c == category; });
 
         foreach (string c in OtherContent)
         {
@@ -94,9 +114,22 @@ class SpeedFinding : MiniGame
         for (int i = 0; i < Cards.Count; i++)
         {
             int tmp = UnityEngine.Random.Range(0, Points.Count - 1);
+            try
+            {
+                Cards[i].gameObject.transform.position = Points[tmp];
+                Points.RemoveAt(tmp);
+            }
+            catch { }
+        }
 
-            Cards[i].gameObject.transform.position =  Points[tmp];
-            Points.RemoveAt(tmp);
+        nr++;
+
+        if (nr == 1)
+        {
+            foreach(Card c in Cards)
+            {
+                c.AddTapEvent();
+            }
         }
 
         Invoke("Shuffle", 5f);
@@ -104,8 +137,9 @@ class SpeedFinding : MiniGame
 
     internal override int GetPoints()
     {
-        return 10;
+        return max(score*2,0);
     }
+
     void OnDestroy()
     {
         try { CancelInvoke("Shuffle"); } catch { }
@@ -115,5 +149,5 @@ class SpeedFinding : MiniGame
         Destroy(board);
     }
 
-
+    int max(int a, int b) { return a > b ? a : b; }
 }
