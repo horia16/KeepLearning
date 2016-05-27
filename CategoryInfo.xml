@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<CategoriesInfoContainer>
+  <Categories>
+    
+	<Category name = "Cultura generala">
+		
+		<Subcategories>
+	
+			<Category name = "Mate">
+      <Subcategories>
+      
+        <Category name = "Geometrie">
+          <Subcategories>
+            
+            <Category name = "Triunghi">
+              <WordsCount>5</WordsCount>
+              <ImagesCount>0</ImagesCount>
+            </Category> <!-- Triunghi -->
+
+            <Category name = "Patrat">s
+              <WordsCount>3</WordsCount>
+              <ImagesCount>0</ImagesCount>
+            </Category> <!-- Patrat -->
+            
+          </Subcategories>
+		  
+			<WordsCount>7</WordsCount>
+			<ImagesCount>3</ImagesCount>
+        </Category> <!-- Geometrie -->
+  
+        <Category name = "Algebra">
+			<Subcategories>
+				<Category name = "Calcule">
+					<WordsCount>5</WordsCount>
+					<ImagesCount>0</ImagesCount>
+				</Category>
+			</Subcategories>
+        </Category> <!-- Algebra -->
+   
+		<Category name = "Simboluri matematice">
+			<WordsCount>0</WordsCount>
+			<ImagesCount>16</ImagesCount>
+		</Category>
+      </Subcategories>
+      
+		<WordsCount>8</WordsCount>
+		<ImagesCount>4</ImagesCount>
+    </Category> <!-- Mate -->
+    
+			<Category name = "Biologie">
+				
+				<Subcategories>
+					
+					<Category name = "Sistemul circulator">
+						<WordsCount>10</WordsCount>
+						<ImagesCount>3</ImagesCount>
+					</Category>
+				
+					<Category name = "Sistemul respirator">
+						<WordsCount>9</WordsCount>
+						<ImagesCount>3</ImagesCount>
+					</Category>
+					
+					<Category name = "Celula">
+						<WordsCount>14</WordsCount>
+						<ImagesCount>2</ImagesCount>
+					</Category>
+					
+				</Subcategories>
+				<WordsCount>8</WordsCount>
+				<ImagesCount>4</ImagesCount>
+			</Category>
+			
+			<Category name = "Chimie">
+			
+				<Subcategories>
+					<Category name = "Substante">
+						<WordsCount>7</WordsCount>
+						<ImagesCount>0</ImagesCount>
+					</Category>
+				</Subcategories>
+				<WordsCount>11</WordsCount>
+				<ImagesCount>0</ImagesCount>
+			</Category>
+		</Subcategories>
+	</Category>
+  </Categories>
+</CategoriesInfoContainer> <!-- Questions -->

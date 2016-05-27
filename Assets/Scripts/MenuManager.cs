@@ -17,6 +17,9 @@ namespace KeepLearning
         public GameObject GameSelectorMenu;
         public GameObject GamePanel;
 
+        public GameObject StartMenu;
+        public GameObject CreditsMenu;
+
         public MiniGame currentGame;
 
         string CategoryInfoXmlPath = Path.Combine(Environment.CurrentDirectory, "CategoryInfo.xml");
@@ -114,6 +117,11 @@ namespace KeepLearning
             menu = null;
         }
         
+        public void CreditsMenuOpen(bool value)
+        {
+            StartMenu.SetActive(!value);
+            CreditsMenu.SetActive(value);
+        }
 
     }
 }

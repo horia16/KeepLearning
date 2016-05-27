@@ -3,12 +3,9 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-namespace KeepLearning
-{
 	public class ElementsRemoverController : MiniGame
 	{
 		public Text categoryName;
-        int speed;
 		Canvas gameCanvas;
 		GameObject startPointUp;
 		GameObject startPointDown;
@@ -25,6 +22,7 @@ namespace KeepLearning
 		int numberOfWrong;
 		int point;
 
+    Color32 orange;
 
 		void Awake()
 		{
@@ -32,6 +30,7 @@ namespace KeepLearning
 			startPointUp = this.gameObject.transform.FindChild ("StartPointUp").gameObject;
 			startPointDown = this.gameObject.transform.FindChild ("StartPointDown").gameObject;
 			prefabButton = Resources.Load <GameObject> ("Prefabs/ElementsRemover/ButtonPrefab");
+        orange = new Color32(202, 81, 0,255);
 		}
 
 		void resizeCollider()
@@ -56,12 +55,10 @@ namespace KeepLearning
 			GameFinished ();
 		}
 
-		// to do resize collider
 		public override void StartGame(Category domain, GameObject canvas)
 		{
 			point = 0;
 			time = 0;
-            speed = 100;
 			isStarted = true;
 			domain.GetSubcategoriesElements ();
             //resizeCollider ();
@@ -106,6 +103,7 @@ namespace KeepLearning
 			}
 		}
 
+
 		void Update()
 		{
 			if (isStarted)
@@ -134,19 +132,24 @@ namespace KeepLearning
 							
 							int aux = Random.Range (0, rightWords.Count);
 
-							prefabButton.GetComponentInChildren<Text>().text = rightWords [aux];
+                        prefabButton.GetComponent<Image>().sprite = null;
+                        prefabButton.GetComponent<Image>().color = orange;
+                        prefabButton.GetComponentInChildren<Text>().text = rightWords [aux];
 							rightWords.RemoveAt (aux);
 							LoadElement (prefabButton, true);
 						}
 						else
 						{
-							Image image;
-							int aux = Random.Range (0, rightImages.Count);
-							image = Resources.Load <Image>(rightImages [aux]);
+                        GameObject image = prefabButton;
+
+                            int aux = Random.Range (0, rightImages.Count);
+                         image.GetComponentInChildren<Text>().text = "";
+                        image.GetComponent<Image>().color =Color.white;
+                        image.GetComponent<Image>().sprite = Resources.Load <Sprite>(rightImages [aux]);
 							rightImages.RemoveAt (aux);
 
 							if (image!=null)
-								LoadElement (image.gameObject, true);
+								LoadElement (image, true);
 
 						}
 						numberOfWrong = Random.Range(2,6);
@@ -162,19 +165,25 @@ namespace KeepLearning
 
 						if (index == 0)
 						{
-							int aux = Random.Range (0, wrongWords.Count);
+                        prefabButton.GetComponent<Image>().sprite = null;
+                        prefabButton.GetComponent<Image>().color = orange;
+
+                        int aux = Random.Range (0, wrongWords.Count);
 							prefabButton.GetComponentInChildren<Text>().text = wrongWords [aux];
 							LoadElement (prefabButton, false);
 						}
 						else
 						{
-							Image image;
-							int aux = Random.Range (0, wrongImages.Count);
-							image = Resources.Load <Image>(wrongImages [aux]);
+
+							GameObject image = prefabButton;
+                        image.GetComponentInChildren<Text>().text = "";
+                        image.GetComponent<Image>().color = Color.white;
+
+                        int aux = Random.Range (0, wrongImages.Count);
+							image.GetComponent<Image>().sprite = Resources.Load <Sprite>(wrongImages [aux]);
 
 							if (image!=null)
-							LoadElement (image.gameObject, false);
-
+								LoadElement (image, false);
 						}
 						numberOfWrong--;
 					}
@@ -187,12 +196,10 @@ namespace KeepLearning
 			GameObject element = GameObject.Instantiate (element2);
 			element.transform.SetParent (this.transform,false);
 			element.transform.position = new Vector3 (startPointDown.transform.position.x, Random.Range (startPointDown.transform.position.y, startPointUp.transform.position.y), 0f);
-			element.AddComponent <ElementMover>();
+			element.AddComponent <KeepLearning.ElementMover>();
 			element.AddComponent <GameItem> ();
 			element.GetComponent <Button>().onClick.AddListener (() => ButtonClick(element));
 			element.GetComponent <GameItem> ().IsCorectItem = IsCorectItem;
-            speed++;
-            element.GetComponent<ElementMover>().speed = speed; 
 		}
 
 		Category GetRandomSubcategory(Category category)
@@ -242,4 +249,4 @@ namespace KeepLearning
 			}
 		}
 	}
-}
+

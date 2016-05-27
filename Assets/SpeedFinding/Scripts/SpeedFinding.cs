@@ -19,7 +19,9 @@ class SpeedFinding : MiniGame
 
     int score;
     int nr;
-    public  int guessed;
+
+    int wrong = 0;
+    int correct= 0;
 
     public void OnTap(Card c,bool correct)
     {
@@ -27,19 +29,25 @@ class SpeedFinding : MiniGame
         if (correct)
         {
             score++;
-            guessed++;
-            if(guessed==5)
+            this.correct++;
+            if (this.correct == 5)
             {
                 GameFinished();
             }
         }
         else
+        {
             score--;
-    }
+            wrong++;
+        }
+
+        Score.text = "Correct:" + this.correct.ToString() + " Wrong:" + wrong.ToString();
+
+   }
 
     public override void StartGame(Category domain, GameObject canvas)
     {
-        guessed = score = nr = 0;
+        correct = wrong = score = nr = 0;
 
         if (boardPrefab == null)
             boardPrefab = Resources.Load<GameObject>("SpeedFinding\\Prefabs\\Board");

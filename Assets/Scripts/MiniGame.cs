@@ -28,7 +28,7 @@ public class MiniGame : MonoBehaviour
             gameBorderPrefab = Resources.Load<GameObject>("Prefabs\\GameBorder");
 
         Domain = domain;
-       // transform.SetParent(canvas.transform, false);
+        transform.SetParent(canvas.transform, false);
 
         Border = GameObject.Instantiate(gameBorderPrefab);
         Border.transform.SetParent(canvas.transform,false);
@@ -38,6 +38,7 @@ public class MiniGame : MonoBehaviour
         timer = Border.transform.GetDeepChild("Timer").gameObject;
         Score = Border.transform.GetDeepChild("Score").GetComponent<Text>();
         Border.transform.GetDeepChild("Back").GetComponent<Button>().onClick.AddListener(() => GameFinished() );
+        Score.text = "";
     }
 
     internal virtual int GetPoints()
