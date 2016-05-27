@@ -11,7 +11,7 @@ public class MiniGame : MonoBehaviour
      
     public event Action<int> OnGameFinished;
     
-    internal GameObject Timer;
+    internal GameObject timer;
     internal GameObject Border;
     internal Text Score;
 
@@ -31,11 +31,11 @@ public class MiniGame : MonoBehaviour
         transform.SetParent(canvas.transform, false);
 
         Border = GameObject.Instantiate(gameBorderPrefab);
-        Border.transform.SetParent(canvas.transform);
-        Border.transform.localPosition = Vector3.zero;
-        Border.transform.localScale = Vector3.one;
+        Border.transform.SetParent(canvas.transform,false);
+      //  Border.transform.localPosition = Vector3.zero;
+       // Border.transform.localScale = Vector3.one;
 
-        Timer = Border.transform.GetDeepChild("Timer").gameObject;
+        timer = Border.transform.GetDeepChild("Timer").gameObject;
         Score = Border.transform.GetDeepChild("Score").GetComponent<Text>();
         Border.transform.GetDeepChild("Back").GetComponent<Button>().onClick.AddListener(() => GameFinished() );
     }

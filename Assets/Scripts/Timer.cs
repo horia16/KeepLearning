@@ -20,6 +20,8 @@ public class Timer : MonoBehaviour {
 
     public static event System.Action OnTic;
 
+    public static void ResetEvent() { OnTic = null; }
+
     void Awake()
     { 
         timer = this;
