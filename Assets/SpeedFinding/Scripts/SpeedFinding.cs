@@ -19,9 +19,11 @@ class SpeedFinding : MiniGame
     
     Category domain, category;
 
+    const int gameTime = 30;
+
     int score;
     int nr;
-   public  int guessed;
+    public  int guessed;
 
     public void OnTap(Card c,bool correct)
     {
@@ -47,8 +49,7 @@ class SpeedFinding : MiniGame
             boardPrefab = Resources.Load<GameObject>("SpeedFinding\\Prefabs\\Board");
 
         board = GameObject.Instantiate(boardPrefab);
-        board.transform.SetParent(canvas.transform);
-        board.transform.localScale = Vector3.one;
+        board.transform.SetParent(canvas.transform,false);
 
         this.domain = domain;
         manager = this;
@@ -136,6 +137,10 @@ class SpeedFinding : MiniGame
             {
                 c.AddTapEvent();
             }
+
+            Timer.ResetEvent();
+            Timer.OnTic += GameFinished;
+            Timer.StartCountDown(gameTime);
         }
 
         Invoke("Shuffle", 5f);
